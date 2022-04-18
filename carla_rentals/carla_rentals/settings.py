@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'car.apps.CarConfig',
-    # 'components.trip.apps.TripConfig',
-    # 'components.users.apps.UsersConfig'
+    'car.apps.CarConfig',
+    'trip.apps.TripConfig',
+    'users.apps.UsersConfig'
 
 ]
 
