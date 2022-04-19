@@ -16,12 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from users import urls as users_url
+from users import views as users_views
 from django.conf.urls.static import static
 from django.conf import settings
 
 
 
 urlpatterns = [
+    path("/",users_views.HomeView.as_view() , name = "home-view"),
     path('admin/', admin.site.urls),
     path('users/', include(users_url)),
 
