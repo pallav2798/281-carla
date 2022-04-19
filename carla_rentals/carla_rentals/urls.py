@@ -26,5 +26,7 @@ urlpatterns = [
     path("/",users_views.HomeView.as_view() , name = "home-view"),
     path('admin/', admin.site.urls),
     path('users/', include(users_url)),
+    path('car/', include('car.urls')),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

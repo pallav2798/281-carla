@@ -85,25 +85,25 @@ WSGI_APPLICATION = 'carla_rentals.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-# DATABASES = {
+DATABASES = {
 
-#     'default': {
+    'default': {
 
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-#         'NAME':'av-rentals',
+        'NAME':'av-rentals',
 
-#         'USER': 'sjsu',
+        'USER': 'sjsu',
 
-#         'PASSWORD': 'admin',
+        'PASSWORD': 'admin',
 
-#         'HOST': 'localhost',
+        'HOST': 'localhost',
 
-#         'PORT': '5432',
+        'PORT': '5432',
 
-#     }
+    }
 
-# }
+}
 
 
 
