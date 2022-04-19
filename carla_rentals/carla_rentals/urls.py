@@ -23,7 +23,7 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path("/",users_views.HomeView.as_view() , name = "home-view"),
+    path("",users_views.HomeView.as_view() , name = "home-view"),
     path('admin/', admin.site.urls),
     path('users/', include(users_url)),
 

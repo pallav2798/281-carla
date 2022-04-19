@@ -13,8 +13,8 @@ class Users(models.Model):
         ('Admin','admin'),
     )
     user =  models.ForeignKey(User , null= False,on_delete = models.CASCADE)
-    first_name = models.CharField('First Name',null=True, max_length=30)
-    last_name = models.CharField('Last Name', null=True, max_length=30)
+    first_name = models.CharField('First Name',null=False, max_length=30)
+    last_name = models.CharField('Last Name', null=False, max_length=30)
     role = models.CharField('User Role', max_length=20, choices= USER_ROLES)
     user_email = models.EmailField(null = False)
     street = models.CharField('Street', max_length=200)

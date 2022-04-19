@@ -9,8 +9,18 @@ from django.views.generic import TemplateView
 
 class HomeView(View):
     def get(self, request):
+        if(not request.user.is_authenticated):
+            return render(request, "webapp/login.html")    
         return render(request, 'webapp/base.html')
 
+
+class RegisterView(View):
+    def get(self,request):
+        # super.get()
+        return render(request,"webapp/register.html")
+    
+    def post(self,request):
+        pass
 
 
 class LoginView(View):
@@ -18,3 +28,6 @@ class LoginView(View):
 
     def get(self,request):
         return render(request, "webapp/login.html")
+
+    # def post(self,request):
+    #     email = 
