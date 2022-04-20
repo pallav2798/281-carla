@@ -3,29 +3,30 @@ from django.views import View
 from django.views.generic import TemplateView
 from car.forms import CreateCarEntity
 from .models import Car
+from users.models import Users
+
 class CarEntity(View):
     
     def get(self, request):
         return render(request, 'webapp/car-asset.html')
 
     def post(self, request):
-        user = self.request.user
         # form = request.POST
-        car = Car(owner = user)
-        form = CreateCarEntity(instance=Car, data = request.POST)
-        # form.owner  = user
-        print(form)
-        if form.is_valid():
-            # form['owner'] = user
-            form = form.cleaned_data
+        car_type = request.POST.get('car_type')
+        car_number = request.POST.get('car_number')
+        car_company = request.POST.get('company')
+        car_model = request.POST.get('car_model')
 
-            print('form-------------------------')
-            print(form)
-            try:
+        car = Car(owner = Users.objects.get(user = request.user), car_type = car_type, 
+                car_number=car_number, car_model= car_model, company = car_company)
+        car.save()
 
-                form = form.save(commit=False)
-                form.save()
-                return redirect('home-view')
-            except Exception as e:
-                raise e
+        return redirect('home-view')
+
+class SellerCarList(View):
     
+    def get(self, request):
+        
+        cars = Car.objects.filter(owner = Users.objects.get(user = request.user))
+        return render(request, template_name='webapp/seller-car-list.html', context={'cars':cars})
+

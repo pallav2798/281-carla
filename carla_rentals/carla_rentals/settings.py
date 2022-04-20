@@ -91,11 +91,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME':'AV-Rentals',
+        'NAME':'av-rentals',
 
-        'USER': 'postgres',
+        'USER': 'sjsu',
 
-        'PASSWORD': '1234',
+        'PASSWORD': 'admin',
 
         'HOST': 'localhost',
 

@@ -1,5 +1,6 @@
 
 import email
+from multiprocessing import context
 from django.urls import reverse_lazy,reverse
 from re import template
 from django.shortcuts import redirect, render
@@ -71,16 +72,18 @@ class LoginView(TemplateView):
                 # authenticated
                 login(request,user)
                 users_obj = Users.objects.get(user=user.id)
-                # return reverse('home-page')    
-                # return redirect(reverse('home', kwargs={ 'user':users_obj }))
-                return redirect('home-page')
-                # return render(request, 'webapp/user-home.html',{"error":"Wrong Credentials"})
-            else:
+                # return render(request, 'webapp/user-home.html')
+                request.session['role'] = users_obj.role
+                if users_obj.role == 'Seller':
+                    return redirect('car_asset')
+                else:
+                    return redirect('home-page' )
 
+            else:
                 return render(request, 'webapp/login.html',{"error":"Wrong Credentials"})
         except Exception as e:
             print(e)
-            return render(request,'404-page.html')
+            return render(request,'webapp/404-page.html')
 
 
       

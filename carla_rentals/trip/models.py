@@ -6,6 +6,7 @@ from car.models import Car
 class Trips(models.Model):
     user = models.ForeignKey(Users,null = False,on_delete = models.CASCADE)
     car = models.ForeignKey(Car,null = False ,on_delete = models.CASCADE)
+    status = models.CharField('status',max_length=30, null = True)
     source = models.CharField('Source', max_length=100, null=False)
     destination = models.CharField('Source', max_length=100, null=False)
     start_time = models.DateTimeField('Start Time', null = False)

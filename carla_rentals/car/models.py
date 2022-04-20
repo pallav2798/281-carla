@@ -8,5 +8,8 @@ class Car(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     car_number = models.CharField('Car Number', max_length=10,null = False, unique=True)
     company = models.CharField('Car Company', null = False, max_length=30)
+    car_model = models.CharField('Car Model', null = True, max_length=30)
+    availability = models.BooleanField(default=True)
+
 
 
