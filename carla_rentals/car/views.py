@@ -1,4 +1,5 @@
 from queue import PriorityQueue
+import re
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import TemplateView
@@ -38,8 +39,6 @@ class UsersCarsList(View):
         user = Users.objects.get(user = request.user)
         cars = Car.objects.all()
 
-        print(request.POST['source'])
-
         request.session['source']=request.POST['source']
         request.session['destination']=request.POST['destination']
         request.session['pickup-date']=request.POST['pickup-date']
@@ -57,10 +56,14 @@ class BookCarView(View):
         trip=Trips(car=car,user=users)
 
         trip.status = True
+
+        print(request.session['source'],"^^^^^^^^^^^^^^^^^^")
+
         trip.source=request.session['source']
+        print(trip.source)
         trip.destination=request.session['destination']
-        trip.start_date=request.session['pickup-date']
-        trip.end_date=request.session['dropoff-date']
+        trip.start_time=request.session['pickup-date']
+        trip.end_time=request.session['dropoff-date']
         trip.time=request.session['time']
 
         car.save()

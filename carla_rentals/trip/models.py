@@ -9,8 +9,9 @@ class Trips(models.Model):
     status = models.CharField('status',max_length=30, null = True)
     source = models.CharField('Source', max_length=100, null=False)
     destination = models.CharField('Source', max_length=100, null=False)
-    start_time = models.CharField('Start Time', max_length=30,null = False,default="")
-    end_time = models.CharField('End Time',max_length=30,default="", null=False)
+    start_time = models.CharField('Start Date', max_length=30,null = False,default="")
+    end_time = models.CharField('End Date',max_length=30,default="", null=False)
+    time=models.CharField("Time",max_length=20,null=False,default="")
     duration = models.CharField('Duration',max_length=30)
 
 class Transaction(models.Model):
