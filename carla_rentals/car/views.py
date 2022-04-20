@@ -30,3 +30,11 @@ class SellerCarList(View):
         cars = Car.objects.filter(owner = Users.objects.get(user = request.user))
         return render(request, template_name='webapp/seller-car-list.html', context={'cars':cars})
 
+
+class UsersCarsList(View):
+
+    def post(self, request):
+        user = Users.objects.get(user = request.user)
+        cars = Car.objects.filter(availability = True)
+        
+        return render(request, 'webapp/users-available-cars.html', context={'cars':cars})

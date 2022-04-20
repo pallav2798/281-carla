@@ -1,8 +1,8 @@
-from operator import imod
 from django.shortcuts import render
 from .models import Trips
 from django.views import View
 from users.models import Users
+from car.models import Car
 
 class SellerCarTrips(View):
 
@@ -10,11 +10,8 @@ class SellerCarTrips(View):
         user = request.user
         trips = Trips.objects.filter(car__id = pk , user = Users.objects.get(user = user))
 
-        return render(request, 'webapp/seller-car-trips.html', context={'trips':trips})
+        return render(request, 'webapp/seller-car-trips.html')
 
-# class CustomerTrips(View):
-
-#     def post(self, request):
 
 
 

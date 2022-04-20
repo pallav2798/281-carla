@@ -7,21 +7,16 @@
 <section class="ftco-section bg-light">
     <div class="container">
         <div class="row">
-            {% for trip in trips %}
-            <div class="col-md-4">
+            <div class="col-md-16">
                 <div class="car-wrap rounded ftco-animate">
-                    <div class="img rounded d-flex align-items-end"
-                        style="background-image: url(/static/images/car-1.jpg);">
-                    </div>
                     <div class="text">
-                        <div class="d mb-8">
+                        <div class="d mb-12">
                             <p style="font-weight: bold;">{{trip.car.car_name}}</p>
                             <p style="font-weight: bold;">Registered On:<span> {{trip.source}}</span></p>
                         </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
     </div>
 </section>

@@ -7,9 +7,9 @@ User = get_user_model()
 class Users(models.Model):
     
     USER_ROLES = (
-        ('Seller','seller'),
-        ('Owner','owner'),
-        ('Admin','admin'),
+        ('seller','Seller'),
+        ('customer','Customer'),
+        ('admin','Admin'),
     )
     user =  models.ForeignKey(User, null= False,on_delete = models.CASCADE)
     first_name = models.CharField('First Name',null=False, max_length=30,default="")
