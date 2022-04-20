@@ -60,8 +60,7 @@ class RegisterView(FormView):
 class LogoutView(View):
     def get(self,request):
         logout(request)
-        print("**********")
-        return render(request,"webapp/login.html")
+        return redirect("login-page")
 
 
 class LoginView(TemplateView):

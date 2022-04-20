@@ -1,9 +1,11 @@
+from queue import PriorityQueue
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import TemplateView
 from car.forms import CreateCarEntity
 from .models import Car
-from users.models import Users
+from users.models import User, Users
+from trip.models import Trips
 
 class CarEntity(View):
     
@@ -30,11 +32,38 @@ class SellerCarList(View):
         cars = Car.objects.filter(owner = Users.objects.get(user = request.user))
         return render(request, template_name='webapp/seller-car-list.html', context={'cars':cars})
 
-
 class UsersCarsList(View):
 
     def post(self, request):
         user = Users.objects.get(user = request.user)
-        cars = Car.objects.filter(availability = True)
-        
-        return render(request, 'webapp/users-available-cars.html', context={'cars':cars})
+        cars = Car.objects.all()
+
+        print(request.POST['source'])
+
+        request.session['source']=request.POST['source']
+        request.session['destination']=request.POST['destination']
+        request.session['pickup-date']=request.POST['pickup-date']
+        request.session['dropoff-date']=request.POST['dropoff-date']
+        request.session['time']=request.POST['time']
+
+        return render(request, 'webapp/users-available-cars.html', context={"cars":cars} )
+
+
+class BookCarView(View):
+    def get(self,request,pk):
+        users = Users.objects.get(user=request.user)
+        car = Car.objects.get(id=pk)
+        car.availability = False
+        trip=Trips(car=car,user=users)
+
+        trip.status = True
+        trip.source=request.session['source']
+        trip.destination=request.session['destination']
+        trip.start_date=request.session['pickup-date']
+        trip.end_date=request.session['dropoff-date']
+        trip.time=request.session['time']
+
+        car.save()
+        trip.save()
+
+        return redirect("home-page")

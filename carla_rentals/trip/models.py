@@ -9,9 +9,9 @@ class Trips(models.Model):
     status = models.CharField('status',max_length=30, null = True)
     source = models.CharField('Source', max_length=100, null=False)
     destination = models.CharField('Source', max_length=100, null=False)
-    start_time = models.DateTimeField('Start Time', null = False)
-    end_time = models.DateTimeField('End Time', null=False)
-    duration = models.TimeField('Duration')
+    start_time = models.CharField('Start Time', max_length=30,null = False,default="")
+    end_time = models.CharField('End Time',max_length=30,default="", null=False)
+    duration = models.CharField('Duration',max_length=30)
 
 class Transaction(models.Model):
     trip = models.ForeignKey(Trips, null = False,on_delete = models.CASCADE)
