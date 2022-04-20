@@ -1,0 +1,81 @@
+{% extends 'webapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<section class="ftco-section ftco-no-pt bg-light">
+    <div class="container" style="padding-top: 0%;">
+        <div class="row no-gutters">
+            <div class="col-md-12	featured-top">
+                <div class="row no-gutters">
+                    <div class="col-md-12 d-flex align-items-center">
+                        <div class="services-wrap rounded-right w-100">
+                            <form method="post" action="{% url 'car_asset' %}" class="request-form ftco-animate bg-primary">
+                                {% csrf_token %}
+                                <h1 style="text-align: center; color: yellow;">Add Your Car For Rental</h1>
+                                <div class="form-group">
+                                    <label for="" class="label">Car Number</label>
+                                    <input type="text" name="car_number" class="form-control" placeholder="Car Number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Car Type</label>
+                                    <select name="car_type" id="cars" class="form-control">
+                                        <option value="compact">Compact</option>
+                                        <option value="sedan">Sedan</option>
+                                        <option value="SUV">SUV</option>
+                                        <option value="minivan">Minivan</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Car Company</label>
+                                    <input type="text" name="car_company" class="form-control"
+                                        placeholder="Car Company">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Add Car" class="btn btn-warning py-3 px-4">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-8 d-flex align-items-center">
+                        <div class="services-wrap rounded-right w-100">
+                            <h3 class="heading-section mb-4">Better Way to Rent Your Perfect Cars</h3>
+                            <div class="row d-flex mb-4">
+                                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                                    <div class="services w-100 text-center">
+                                        <div class="icon d-flex align-items-center justify-content-center"><span
+                                                class="flaticon-route"></span></div>
+                                        <div class="text w-100">
+                                            <h3 class="heading mb-2">Choose Your Pickup Location</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                                    <div class="services w-100 text-center">
+                                        <div class="icon d-flex align-items-center justify-content-center"><span
+                                                class="flaticon-handshake"></span></div>
+                                        <div class="text w-100">
+                                            <h3 class="heading mb-2">Select the Best Deal</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 d-flex align-self-stretch ftco-animate">
+                                    <div class="services w-100 text-center">
+                                        <div class="icon d-flex align-items-center justify-content-center"><span
+                                                class="flaticon-rent"></span></div>
+                                        <div class="text w-100">
+                                            <h3 class="heading mb-2">Reserve Your Rental Car</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p><a href="#" class="btn btn-primary py-3 px-4">Reserve Your Perfect Car</a></p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}

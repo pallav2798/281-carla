@@ -2,30 +2,6 @@
 {% block content %}
 <!-- END nav -->
 
-<div class="hero-wrap ftco-degree-bg" style="background-image: url('../static/images/bg_1.jpg');"
-	data-stellar-background-ratio="0.5">
-	<div class="overlay"></div>
-	<div class="container">
-		<div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
-			<div class="col-lg-8 ftco-animate">
-				<div class="text w-100 text-center mb-md-5 pb-md-5">
-					<h1 class="mb-4"><i> Register to access our AV Rentals</i> </h1>
-					<!-- <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p> -->
-					<a href="https://vimeo.com/45830194"
-						class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">
-						<div class="icon d-flex align-items-center justify-content-center">
-							<span class="ion-ios-play"></span>
-						</div>
-						<div class="heading-title ml-5">
-							<span>Guide for new customers</span>
-						</div>
-					</a>
-				</div>
-
-			</div>
-		</div>
-	</div>
-</div>
 
 <section class="ftco-section ftco-no-pt bg-light">
 	<div class="container">
@@ -33,19 +9,45 @@
 			<div class="col-md-12	featured-top">
 				<div class="row no-gutters">
 					<div class="col-md-12 justify-content-center  align-items-center">
-						<form action="#" class="request-form ftco-animate bg-primary">
-							<h2>Register Here</h2>
+						{% if form.errors %}
+							{% for field in form %}
+								{% for error in field.errors %} 
+									<div class="alert alert-danger">
+										<strong>{{field.name}} : {{ error|escape }}</strong>
+									</div>
+								{% endfor %}
+							{% endfor %}
+						{% endif %}
 
+						<form method="post" class="request-form ftco-animate bg-primary">
+							{% csrf_token %}
+							<h2>Register Here</h2>
 							<div class="form-group">
-								<label for="" class="label">Email</label>
-								<input type="text" class="form-control" placeholder="Enter email">
+								<label for="" class="label">First Name</label>								
+								{{form.first_name}}
 							</div>
 							<div class="form-group">
-								<label for="" class="label">Password</label>
-								<input type="password" class="form-control" placeholder="Enter Password">
+								<label for="" class="label">Last Name</label>								
+								{{form.last_name}}
 							</div>
 							<div class="form-group">
-								<input type="submit" value="Login" class="btn btn-secondary py-3 px-4">
+								<label for="" class="label">Email</label>								
+								{{form.user_email}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Role</label>								
+								{{form.role}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Password</label>								
+								{{form.password}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Confirm Password</label>
+								{{form.cpassword}}
+							</div>
+							<div class="form-group">
+								<input type="submit" value="Register" class="btn btn-secondary py-3 px-4">
 							</div>
 						</form>
 					</div>

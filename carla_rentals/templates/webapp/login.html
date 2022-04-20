@@ -2,54 +2,40 @@
 {% block content %}
 <!-- END nav -->
 
-<div class="hero-wrap ftco-degree-bg" style="background-image: url('../static/images/bg_1.jpg');"
-	data-stellar-background-ratio="0.5">
-	<div class="overlay"></div>
-	<div class="container">
-		<div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
-			<div class="col-lg-8 ftco-animate">
-				<div class="text w-100 text-center mb-md-5 pb-md-5">
-					<h1 class="mb-4"><i> Fast &amp; Easy Way To Rent A Car with Carla AV Rentals</i> </h1>
-					<!-- <p style="font-size: 18px;">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts</p> -->
-					<a href="https://vimeo.com/45830194"
-						class="icon-wrap popup-vimeo d-flex align-items-center mt-4 justify-content-center">
-						<div class="icon d-flex align-items-center justify-content-center">
-							<span class="ion-ios-play"></span>
-						</div>
-						<div class="heading-title ml-5">
-							<span>Guide for new customers</span>
-						</div>
-					</a>
-				</div>
-
-			</div>
-		</div>
-	</div>
-</div>
 
 <section class="ftco-section ftco-no-pt bg-light">
 	<div class="container">
 		<div class="row no-gutters">
 			<div class="col-md-12	featured-top">
 				<div class="row no-gutters">
-					<div class="col-md-4 d-flex align-items-center">
-						<form action="#" class="request-form ftco-animate bg-primary">
-							<h2>Make your trip Better with Carla AV Rentals</h2>
-
+					<div class="col-md-6 d-flex align-items-center">
+						<form method="post" class="request-form ftco-animate bg-primary">
+							{% csrf_token %}
+							<h2>Login to access Carla AV Rentals</h2>
+							{% if error %}
+							<div class="alert alert-danger">
+								<strong>{{ error|escape }}</strong>
+							</div>
+							{% endif %}
+							
 							<div class="form-group">
-								<label for="" class="label">Email</label>
-								<input type="text" class="form-control" placeholder="Enter email">
+								<label for="" class="label">Username</label>
+								<input type="text" name="username" class="form-control" placeholder="Enter username">
 							</div>
 							<div class="form-group">
 								<label for="" class="label">Password</label>
-								<input type="password" class="form-control" placeholder="Enter Password">
+								<input type="password" name="password" class="form-control" placeholder="Enter Password">
 							</div>
+							
 							<div class="form-group">
 								<input type="submit" value="Login" class="btn btn-secondary py-3 px-4">
+							</div>							
+							<div class="form-group">								
+								<a href="{% url 'register' %}" class="btn btn-secondary py-2 text-center">Register</a>								
 							</div>
 						</form>
 					</div>
-					<div class="col-md-8 d-flex align-items-center">
+					<div class="col-md-6 d-flex align-items-center">
 						<div class="services-wrap rounded-right w-100">
 							<h3 class="heading-section mb-4">Better Way to Rent Your Perfect Cars</h3>
 							<div class="row d-flex mb-4">
@@ -87,6 +73,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 </section>
 
 

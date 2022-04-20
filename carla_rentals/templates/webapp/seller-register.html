@@ -1,0 +1,60 @@
+{% extends 'webapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<section class="ftco-section ftco-no-pt bg-light">
+    <div class="container" style="padding-top: 0%;">
+        <div class="row no-gutters">
+            <div class="col-md-12	featured-top">
+                <div class="row no-gutters">
+                    <div class="col-md-12 d-flex align-items-center">
+                        <div class="services-wrap rounded-right w-100">
+                            <form method="post" action="{% url 'seller_register' %}" class="request-form ftco-animate bg-primary">
+                                {% csrf_token %}
+                                <h1 style="text-align: center; color: yellow;">Register To Rent Your Car</h1>
+                                <div class="form-group">
+                                    <label for="" class="label">First Name</label>
+                                    <input type="text" name="firstname" class="form-control" placeholder="Ken">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Last Name</label>
+                                    <input type="text" name="lastname" class="form-control" placeholder="Adams">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Username</label>
+                                    <input type="text" name="username" class="form-control" placeholder="example@gmail.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Password</label>
+                                    <input type="password" name="password" class="form-control" placeholder="*****">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Street 1</label>
+                                    <input type="text" name="street" class="form-control" placeholder="111 xyz avenue">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Street 2</label>
+                                    <input type="text" name="street_2" class="form-control" placeholder="Optional">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">City</label>
+                                    <input type="text" name="City" class="form-control" placeholder="San Jose">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">State</label>
+                                    <input type="text" name="state" class="form-control" placeholder="California">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Register As Seller" class="btn btn-warning py-3 px-4">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}
