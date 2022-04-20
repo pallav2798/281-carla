@@ -9,7 +9,7 @@ from django.views.generic import TemplateView,FormView
 from django.contrib.auth import authenticate,login
 from .forms import RegistrationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login,logout
 from .models import Users
 
 class HomeView(View):
@@ -56,6 +56,12 @@ class RegisterView(FormView):
         return super().post(request, *args, **kwargs)
 
 
+
+class LogoutView(View):
+    def get(self,request):
+        logout(request)
+        print("**********")
+        return render(request,"webapp/login.html")
 
 
 class LoginView(TemplateView):
