@@ -56,11 +56,7 @@ class BookCarView(View):
         trip=Trips(car=car,user=users)
 
         trip.status = True
-
-        print(request.session['source'],"^^^^^^^^^^^^^^^^^^")
-
         trip.source=request.session['source']
-        print(trip.source)
         trip.destination=request.session['destination']
         trip.start_time=request.session['pickup-date']
         trip.end_time=request.session['dropoff-date']
