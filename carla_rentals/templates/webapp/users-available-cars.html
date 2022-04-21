@@ -14,15 +14,18 @@
                         style="background-image: url(/static/images/car-1.jpg);">
                     </div>
                     <div class="text">
+                        {# {% if car.availability  %} #}           
+                        <b style="float:right;color: black;" >${{car.price}}</b>
+                        {# {% endif %} #}
                         <h2 class="mb-0"><a href="car-single.html">{{car.car_model}}</a></h2>
-                        <div class="d mb-8">
-                            <p style="font-weight: bold;">{{car.company}}</p>
-                        </div>
-                        {# {% if car.availability  %} #}
-                        <p class="d mb-8"><a href="{% url 'book-car-payment' pk=car.id %}" class="btn btn-primary py-2 mr-1">Book Now</a></p>
+                        <p style="font-weight: bold;">{{car.company}}</p>
+
+                        {# {% if car.availability  %} #}                        
+                        <p class="d mb-8"><a href="{% url 'book-car-payment' pk=car.id %}" class="btn btn-primary py-2 mr-1">Book Now</a></p>                        
                         {# {% else %} #}
                         <!-- <span style="pointer-events: none;" >Unavailable</span> -->
                         {# {% endif %} #}
+                        
                     </div>
                 </div>
             </div>

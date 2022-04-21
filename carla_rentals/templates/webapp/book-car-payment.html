@@ -13,46 +13,81 @@
                     <div class="col-md-12 d-flex align-items-center" style="bac: red;">
 
                         <div class=" rounded-right w-100">
-                            <div class="col-md-6">
+                            <div class="col-md-8" style="margin: auto;">
                                 <div class="car-wrap rounded ftco-animate">
                                     <div class="img rounded d-flex align-items-end"
                                         style="background-image: url(/static/images/car-1.jpg);">
                                     </div>
                                     <div class="text">
+                                        {# {% if car.availability %} #}
+                                        <b style="float:right;color: black;">${{car.price}}</b>
+                                        {# {% endif %} #}
                                         <h2 class="mb-0"><a href="car-single.html">{{car.car_model}}</a></h2>
-                                        <div class="d mb-8">
-                                            <p style="font-weight: bold;">{{car.company}}</p>
+                                        <p style="font-weight: bold;">{{car.company}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px;">
+                                            <div class="text" style="color: black;">
+                                                <h1>Trip info</h1>
+                                                <hr>
+                                                <b>Source : </b> {{source}} <br>
+                                                <b> Destination : </b> {{destination}} <br>
+                                                <b> Start Date : </b> {{start_date}} <br>
+                                                <b> End Date : </b> {{end_date}} <br>
+                                                <b> Time : </b> {{time}} <br> <br>
+                                                <p class="d mb-8"><a href="{% url 'home-page'  %}"
+                                                        class="btn btn-primary py-2 mr-1">Edit Trip</a></p>
+                                                <!-- <span style="pointer-events: none;" >Unavailable</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="car-wrap rounded ftco-animate" style="box-shadow: 6px 4px 4px 4px;">
+                                            <div class="text" style="color: black;">
+                                                <h1>Car Info</h1>
+                                                <hr>
+                                                <b> Car Type : </b> {{car.car_type}} <br>
+                                                <b> Car Number : </b> {{car.car_number}} <br>
+                                                <b> Company : </b> {{car.company}} <br>
+                                                <b> Car Model : </b> {{car.car_model}} <br>
+                                                <b> Price : </b> ${{car.price}} <br> <br>
+                                                <p class="d mb-8"><a href="{% url 'users_cars_availablity_list' %}"
+                                                        class="btn btn-primary py-2 mr-1">Change Car</a></p>
+                                                <!-- <span style="pointer-events: none;" >Unavailable</span> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <form method="post" action="{% url 'car_asset' %}"
+
+
+
+                            <form method="post" action="{% url 'book-car' pk=car.id %}"
                                 class="request-form ftco-animate bg-primary">
                                 {% csrf_token %}
-                                <h1 style="text-align: center; color: yellow;">Add Your Car For Rental</h1>
+                                <h1 style="text-align: center; color: yellow;">Payment Plan</h1>
                                 <div class="form-group">
-                                    <label for="" class="label">Car Number</label>
-                                    <input type="text" name="car_number" class="form-control" placeholder="Car Number">
+                                    <label for="" class="label">Card Number</label>
+                                    <input type="text" name="card_number" class="form-control"
+                                        placeholder="Card Number">
                                 </div>
                                 <div class="form-group">
-                                    <label for="" class="label">Car Type</label>
-                                    <select name="car_type" id="cars" class="form-control">
-                                        <option value="compact">Compact</option>
-                                        <option value="sedan">Sedan</option>
-                                        <option value="SUV">SUV</option>
-                                        <option value="minivan">Minivan</option>
-                                    </select>
+                                    <label for="" class="label">Name on Card</label>
+                                    <input type="text" name="card_name" class="form-control" placeholder="Card Number">
                                 </div>
                                 <div class="form-group">
-                                    <label for="" class="label">Car Company</label>
-                                    <input type="text" name="company" class="form-control" placeholder="Car Company">
+                                    <label for="" class="label">CVV</label>
+                                    <input type="text" name="cvv" class="form-control" placeholder="Enter CVV">
                                 </div>
                                 <div class="form-group">
-                                    <label for="" class="label">Car Model</label>
-                                    <input type="text" name="car_model" class="form-control" placeholder="Car Model">
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" value="Add Car" class="btn btn-warning py-3 px-4">
+                                    <input type="submit" value="Book Car" class="btn btn-success py-3 px-4 col-md-6"
+                                        style="margin:auto">
                                 </div>
                             </form>
                         </div>

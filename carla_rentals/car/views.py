@@ -1,12 +1,14 @@
+from email import contentmanager
 from queue import PriorityQueue
 import re
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import TemplateView
+# from requests import session
 from car.forms import CreateCarEntity
 from .models import Car
 from users.models import User, Users
-from trip.models import Trips
+from trip.models import Trips,Transaction
 
 class CarEntity(View):
     
@@ -36,6 +38,10 @@ class SellerCarList(View):
 
 class UsersCarsList(View):
 
+    def get(self,request):
+        cars = Car.objects.all()
+        return render(request, 'webapp/users-available-cars.html', context={"cars":cars} )
+
     def post(self, request):
         user = Users.objects.get(user = request.user)
         cars = Car.objects.all()
@@ -52,15 +58,26 @@ class UsersCarsList(View):
 class BookCarPaymentView(View):
     def get(self,request,pk):
         car = Car.objects.get(id=pk)
-        return render(request,"webapp/book-car-payment.html",{"car":car})
+        context = {
+            'car':car,
+            "source":request.session['source'],
+            "destination":request.session['destination'],
+            "start_date":request.session['pickup-date'],
+            "end_date":request.session['dropoff-date'],
+            "time":request.session['time']
+        }
+        
+        return render(request,"webapp/book-car-payment.html",context)
 
 
 class BookCarView(View):
-    def get(self,request,pk):
+    def post(self,request,pk):
         users = Users.objects.get(user=request.user)
         car = Car.objects.get(id=pk)
-        car.availability = False
         trip=Trips(car=car,user=users)
+        transaction = Transaction(trip=trip)
+
+        car.availability = False
 
         trip.status = True
         trip.source=request.session['source']
@@ -69,7 +86,17 @@ class BookCarView(View):
         trip.end_time=request.session['dropoff-date']
         trip.time=request.session['time']
 
-        car.save()
+        car_owner=Users.objects.get(id=car.owner_id)
+        transaction.payee=car_owner
+        transaction.payer=Users.objects.get(user=request.user) 
+        transaction.amount=car.price
+        transaction.card_number=request.POST['card_number']
+        transaction.card_name=request.POST['card_name']
+        transaction.cvv = request.POST['cvv']
+
         trip.save()
+        transaction.save()
+        car.save()
+        
 
         return redirect("home-page")
