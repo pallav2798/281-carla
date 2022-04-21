@@ -1,6 +1,6 @@
 from email import contentmanager
 from queue import PriorityQueue
-import re
+# import urlparse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import TemplateView
@@ -64,14 +64,15 @@ class BookCarPaymentView(View):
             "destination":request.session['destination'],
             "start_date":request.session['pickup-date'],
             "end_date":request.session['dropoff-date'],
-            "time":request.session['time']
+            "time":request.session['time'],
+            "price":request.GET['price']
         }
         
         return render(request,"webapp/book-car-payment.html",context)
 
 
 class BookCarView(View):
-    def post(self,request,pk):
+    def post(self,request,pk,**kwargs):
         users = Users.objects.get(user=request.user)
         car = Car.objects.get(id=pk)
         trip=Trips(car=car,user=users)
@@ -89,7 +90,8 @@ class BookCarView(View):
         car_owner=Users.objects.get(id=car.owner_id)
         transaction.payee=car_owner
         transaction.payer=Users.objects.get(user=request.user) 
-        transaction.amount=car.price
+        
+        transaction.amount=(int)(request.build_absolute_uri().split("=")[1])
         transaction.card_number=request.POST['card_number']
         transaction.card_name=request.POST['card_name']
         transaction.cvv = request.POST['cvv']

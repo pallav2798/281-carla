@@ -19,9 +19,7 @@
                                         style="background-image: url(/static/images/car-1.jpg);">
                                     </div>
                                     <div class="text">
-                                        {# {% if car.availability %} #}
-                                        <b style="float:right;color: black;">${{car.price}}</b>
-                                        {# {% endif %} #}
+                                        
                                         <h2 class="mb-0"><a href="car-single.html">{{car.car_model}}</a></h2>
                                         <p style="font-weight: bold;">{{car.company}}</p>
                                     </div>
@@ -56,7 +54,7 @@
                                                 <b> Car Number : </b> {{car.car_number}} <br>
                                                 <b> Company : </b> {{car.company}} <br>
                                                 <b> Car Model : </b> {{car.car_model}} <br>
-                                                <b> Price : </b> ${{car.price}} <br> <br>
+                                                <b> Price : </b> ${{price}} <br> <br>
                                                 <p class="d mb-8"><a href="{% url 'users_cars_availablity_list' %}"
                                                         class="btn btn-primary py-2 mr-1">Change Car</a></p>
                                                 <!-- <span style="pointer-events: none;" >Unavailable</span> -->
@@ -68,7 +66,7 @@
 
 
 
-                            <form method="post" action="{% url 'book-car' pk=car.id %}"
+                            <form method="post" action="{% url 'book-car' pk=car.id %}?price={{price}}"
                                 class="request-form ftco-animate bg-primary">
                                 {% csrf_token %}
                                 <h1 style="text-align: center; color: yellow;">Payment Plan</h1>
