@@ -19,3 +19,6 @@ class Transaction(models.Model):
     payer = models.ForeignKey(Users,related_name='payer_person', null = False,on_delete = models.CASCADE)
     payee = models.ForeignKey(Users,related_name='payee_person', null = False,on_delete = models.CASCADE)
     amount  = models.IntegerField(null=False, default=0)
+    card_number = models.CharField("Card Number",max_length=20,null=False,default="")
+    card_name =  models.CharField("Card name",max_length=20,null=False,default="")
+    cvv = models.CharField("CVV",max_length=20,null=False,default="")

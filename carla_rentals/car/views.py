@@ -48,6 +48,12 @@ class UsersCarsList(View):
         return render(request, 'webapp/users-available-cars.html', context={"cars":cars} )
 
 
+class BookCarPaymentView(View):
+    def get(self,request,pk):
+        car = Car.objects.get(id=pk)
+        return render(request,"webapp/book-car-payment.html",{"car":car})
+
+
 class BookCarView(View):
     def get(self,request,pk):
         users = Users.objects.get(user=request.user)

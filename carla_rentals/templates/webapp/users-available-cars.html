@@ -18,11 +18,11 @@
                         <div class="d mb-8">
                             <p style="font-weight: bold;">{{car.company}}</p>
                         </div>
-                        {% if car.availability  %}
-                        <p class="d mb-8"><a href="{% url 'book-car' pk=car.id %}" class="btn btn-primary py-2 mr-1">Book Now</a></p>
-                        {% else %}
-                        <span style="pointer-events: none;" >Unavailable</span>
-                        {% endif %}
+                        {# {% if car.availability  %} #}
+                        <p class="d mb-8"><a href="{% url 'book-car-payment' pk=car.id %}" class="btn btn-primary py-2 mr-1">Book Now</a></p>
+                        {# {% else %} #}
+                        <!-- <span style="pointer-events: none;" >Unavailable</span> -->
+                        {# {% endif %} #}
                     </div>
                 </div>
             </div>
