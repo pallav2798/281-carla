@@ -18,9 +18,11 @@
                         <div class="d mb-8">
                             <p style="font-weight: bold;">{{car.company}}</p>
                             <p style="font-weight: bold;">Registered On:<span> {{car.timestamp}}</span></p>
+                            <p style="font-weight: bold;">Price/hr:<span> ${{car.price_ph}}</span></p>
+                            <p style="font-weight: bold;">Price/day:<span> ${{car.price_pd}}</span></p>
 
                         </div>
-                        <p class="d mb-8"><a href="#" class="btn btn-primary py-2 mr-1">Car Trips taken</a></p>
+                        <p class="d mb-8"><a href="{% url 'seller_car_trips' pk=car.id %}" class="btn btn-primary py-2 mr-1">Car Trips taken</a></p>
                     </div>
                 </div>
             </div>

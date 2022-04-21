@@ -6,19 +6,48 @@
 
 <section class="ftco-section bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col-md-16">
-                <div class="car-wrap rounded ftco-animate">
-                    <div class="text">
-                        <div class="d mb-12">
-                            <p style="font-weight: bold;">{{trip.car.car_name}}</p>
-                            <p style="font-weight: bold;">Registered On:<span> {{trip.source}}</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1 style="text-align: center;">Car Trips Made</h1>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="row">#</th>
+                    <th>Car Company</th>
+                    <th>Car Model</th>
+                    <th>Amount</th>
+
+                    <th> Source</th>
+                    <th> Destination</th>
+                    <th> Start Date</th>
+                    <th> Start Time</th>
+                    <th> End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trans in transactions %}
+                <tr >
+                    <td scope="row"><b>{{ forloop.counter }}</b></td>
+                    <td>{{car_model}}</td>&nbsp;
+                    <td>{{car_company}}</td>
+                    <td>${{trans.amount}}</td>
+
+                    <td> {{trans.trip.source}}</td>
+                    <td> {{trans.trip.destination}}</td>
+                    <td> {{trans.trip.start_time}}</td>
+                    <td> {{trans.trip.time}}</td>
+                    <td> {{trans.trip.end_time}}</td>
+
+                </tr>
+                {% endfor%}
+
+            </tbody>
+        </table>
+
     </div>
 </section>
+<style>
+    th,td{
+        text-align: center;
+    }
 
+</style>
 {% endblock %}

@@ -5,7 +5,7 @@ from django.urls import reverse_lazy,reverse
 from re import template
 from django.shortcuts import redirect, render
 from django.views import View
-from django.views.generic import TemplateView,FormView
+from django.views.generic import TemplateView,FormView, UpdateView
 from django.contrib.auth import authenticate,login
 from .forms import RegistrationForm
 from django.contrib.auth.models import User
@@ -77,8 +77,8 @@ class LoginView(TemplateView):
                 # authenticated
                 login(request,user)
                 users_obj = Users.objects.get(user=user.id)
-                # return render(request, 'webapp/user-home.html')
                 request.session['role'] = users_obj.role
+                request.session['user_id'] = users_obj.id 
                 if users_obj.role == 'Seller':
                     return redirect('car_asset')
                 else:
@@ -91,8 +91,11 @@ class LoginView(TemplateView):
             return render(request,'webapp/404-page.html')
 
 
-      
-
+class ProfileView(UpdateView):
+    model = Users
+    template_name = 'webapp/profile.html'
+    form_class = RegistrationForm
+    success_url = '/users/home-page' 
 
 
 

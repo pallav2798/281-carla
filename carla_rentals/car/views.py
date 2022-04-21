@@ -34,6 +34,7 @@ class SellerCarList(View):
     def get(self, request):
         
         cars = Car.objects.filter(owner = Users.objects.get(user = request.user))
+        print(request.user)
         return render(request, template_name='webapp/seller-car-list.html', context={'cars':cars})
 
 class UsersCarsList(View):
@@ -102,3 +103,25 @@ class BookCarView(View):
         
 
         return redirect("home-page")
+
+
+class UpdateCarDetails(View):
+
+    def get(self,request, pk):
+        car = Car.objects.get(id=pk)
+
+        return render(request, 'webapp/update-car.html', context={'car':car})
+    
+    def post(self, request, pk):
+        car = Car.objects.get(id=pk)
+        car.car_type = request.POST.get('car_type')
+        car.car_number = request.POST.get('car_number')
+        car.car_company = request.POST.get('company')
+        car.car_model = request.POST.get('car_model')
+        car.price = request.POST.get('price')        
+        car.save()
+        
+        return render(request, 'webapp/update-car.html', context={'car':car})
+
+
+        
