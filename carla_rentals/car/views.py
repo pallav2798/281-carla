@@ -19,8 +19,9 @@ class CarEntity(View):
         car_number = request.POST.get('car_number')
         car_company = request.POST.get('company')
         car_model = request.POST.get('car_model')
+        price = request.POST.get('price')
 
-        car = Car(owner = Users.objects.get(user = request.user), car_type = car_type, 
+        car = Car(owner = Users.objects.get(user = request.user), car_type = car_type, price = price, 
                 car_number=car_number, car_model= car_model, company = car_company)
         car.save()
 
