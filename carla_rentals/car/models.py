@@ -10,6 +10,7 @@ class Car(models.Model):
     company = models.CharField('Car Company', null = False, max_length=30)
     car_model = models.CharField('Car Model', null = True, max_length=30)
     availability = models.BooleanField(default=True)
+    price =  models.PositiveIntegerField(default = 0, null=False)
 
 
 
