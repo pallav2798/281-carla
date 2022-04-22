@@ -25,7 +25,7 @@ class SellerCarTrips(View):
 
 class TripHistoryView(View):
     def get(self,request):
-        trips = Trips.objects.filter(user=Users.objects.get(user=request.user).id)
+        trips =Trips.objects.filter(user=Users.objects.get(user=request.user).id).order_by('-id')
         amount=0
         status=None
         for trip in trips:
@@ -39,6 +39,7 @@ class TripHistoryView(View):
             "amount":amount,
             "status":status
         }
+    
         return render(request,"webapp/trip-history.html",context)
 
 class CurrentTripView(View):
