@@ -1,4 +1,5 @@
 from email import contentmanager
+from itertools import count
 from queue import PriorityQueue
 # import urlparse
 from django.shortcuts import redirect, render
@@ -75,7 +76,23 @@ class BookCarPaymentView(View):
 class BookCarView(View):
     def post(self,request,pk,**kwargs):
         users = Users.objects.get(user=request.user)
+
+        trip = Trips.objects.filter(user=users).filter(status=True)
         car = Car.objects.get(id=pk)
+        if trip.count()>0:
+            context = {
+            'car':car,
+            "source":request.session['source'],
+            "destination":request.session['destination'],
+            "start_date":request.session['pickup-date'],
+            "end_date":request.session['dropoff-date'],
+            "time":request.session['time'],
+            "price":request.GET['price'],
+            "error":"You already have an on going trip. End that trip to book a new one"
+            }
+            return render(request,"webapp/book-car-payment.html",context)
+
+        
         trip=Trips(car=car,user=users)
         transaction = Transaction(trip=trip)
 

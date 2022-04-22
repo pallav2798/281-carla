@@ -64,6 +64,14 @@
                                 </div>
                             </div>
 
+                            {% if error %}
+                            <div class="alert alert-danger">
+                                <strong> {{ error|escape }}</strong>
+                            </div>
+                            
+                            {% endif %}
+                            
+
                             <form method="post" action="{% url 'book-car' pk=car.id %}?price={{price}}"
                                 class="request-form ftco-animate bg-dark text-primary" >
                                 {% csrf_token %}
