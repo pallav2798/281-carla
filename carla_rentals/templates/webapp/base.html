@@ -28,8 +28,8 @@
       </head>
     <body>        
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container" style="background-color: black; max-width: 100vw;">
-              <a class="navbar-brand" href="index.html">Carla<span>Rentals</span></a>
+            <div class="container" style="">
+              <a class="navbar-brand" href="{% url 'home-page' %}">Carla<span>Rentals</span></a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
               </button>
@@ -39,6 +39,8 @@
                   {% if request.session.role == 'Seller' %}
                   <li class="nav-item"><a href="{% url 'seller_cars' %}" class="nav-link">Listed Cars</a></li>
                   <li class="nav-item"><a href="{% url 'car_asset' %}" class="nav-link">Add Car</a></li>
+                  {% elif request.session.role == 'customer'%}
+                  <li class="nav-item"><a href="{% url 'current-trip' pk=request.user.id %}" class="nav-link">Current Trip</a></li>
                   {% endif %}                  
 
                   <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>

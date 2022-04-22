@@ -30,7 +30,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
 
-                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px;">
+                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
                                             <div class="text" style="color: black;">
                                                 <h1>Trip info</h1>
                                                 <hr>
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="car-wrap rounded ftco-animate" style="box-shadow: 6px 4px 4px 4px;">
+                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
                                             <div class="text" style="color: black;">
                                                 <h1>Car Info</h1>
                                                 <hr>
@@ -64,24 +64,22 @@
                                 </div>
                             </div>
 
-
-
                             <form method="post" action="{% url 'book-car' pk=car.id %}?price={{price}}"
-                                class="request-form ftco-animate bg-primary">
+                                class="request-form ftco-animate bg-dark text-primary" >
                                 {% csrf_token %}
-                                <h1 style="text-align: center; color: yellow;">Payment Plan</h1>
+                                <h1 style="text-align: center; color: rgb(250, 244, 244) ;">Payment Plan</h1>
                                 <div class="form-group">
                                     <label for="" class="label">Card Number</label>
-                                    <input type="text" name="card_number" class="form-control"
+                                    <input type="text" name="card_number" required class="form-control"
                                         placeholder="Card Number">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">Name on Card</label>
-                                    <input type="text" name="card_name" class="form-control" placeholder="Card Number">
+                                    <input type="text" required name="card_name" class="form-control" placeholder="Card Number">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">CVV</label>
-                                    <input type="text" name="cvv" class="form-control" placeholder="Enter CVV">
+                                    <input type="text" name="cvv" required class="form-control" placeholder="Enter CVV">
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Book Car" class="btn btn-success py-3 px-4 col-md-6"

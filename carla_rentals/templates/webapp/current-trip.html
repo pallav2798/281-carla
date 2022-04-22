@@ -1,0 +1,115 @@
+{% extends 'webapp/base.html' %}
+
+
+{% block content %}
+
+
+    {% if not trip %}
+    <section class="ftco-section ftco-intro" style="background-image: url(images/bg_3.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-md-6 heading-section heading-section-white ftco-animate">
+        <h2 class="mb-3">You have no on going trips</h2>
+        <a href="{% url 'home-page' %}" class="btn btn-primary btn-lg">Book a Ride now</a>
+      </div>
+            </div>
+        </div>
+    </section>
+    {% else %}
+
+  <section class="ftco-section">
+          <div class="container">
+              <div class="row justify-content-center mb-5">
+        <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2 class="mb-3">Current Trip</h2>
+            <span class="subheading">Have a Safe Ride</span>         
+        </div>
+      </div>
+              <div class="row">
+                  <div class="col-md-3">
+                      <div class="services services-2 w-100 text-center">
+              <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+              <div class="text w-100">
+              <h3 class="heading mb-2">Source</h3>
+              <p>{{trip.source}}</p>
+            </div>
+          </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="services services-2 w-100 text-center">
+              <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+              <div class="text w-100">
+              <h3 class="heading mb-2">Destination</h3>
+              <p>{{trip.destination}}</p>
+            </div>
+          </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="services services-2 w-100 text-center">
+              <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+              <div class="text w-100">
+              <h3 class="heading mb-2">Start Date</h3>
+              <p>{{trip.start_time}}</p>
+            </div>
+          </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="services services-2 w-100 text-center">
+              <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
+              <div class="text w-100">
+              <h3 class="heading mb-2">End Date</h3>
+              <p>{{trip.end_time}}</p>
+            </div>
+          </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      
+      <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-12" style="margin: auto;">
+                    <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;" >
+                        <div class="img d-flex align-items-end" style="background-image: url(/static/images/car-1.jpg); border-radius: 30px 30px 0px 0px;">
+                        </div>
+                        <div class="text">                            
+                            <b style="font-weight: bold;color: black;">{{car.company}} {{car.car_model}}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
+                    <div class="text" style="color: black;">
+                        <h1>Car Info</h1>
+                        <hr>
+                        <b> Car Type : </b> {{car.car_type}} <br>
+                        <b> Car Number : </b> {{car.car_number}} <br>
+                        <b> Company : </b> {{car.company}} <br>
+                        <b> Car Model : </b> {{car.car_model}} <br>
+                        <b> Price : </b> ${{trip.price}} <br> <br>
+                        <!-- <p class="d mb-8"><a href="{% url 'users_cars_availablity_list' %}"
+                                class="btn btn-primary py-2 mr-1">Change Car</a></p>
+                        <span style="pointer-events: none;" >Unavailable</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <section class="ftco-section ftco-intro" style="background-image: url(images/bg_3.jpg);">
+          <div class="overlay"></div>
+          <div class="container">
+              <div class="row justify-content-end">
+                  <div class="col-md-6 heading-section heading-section-white ftco-animate">
+          <h2 class="mb-3">Changed your mind?</h2>
+          <h2 class="mb-3">You can end trip any time</h2>
+          <a href="{% url 'end-trip' pk=trip.id %}" class="btn btn-primary btn-lg">End trip</a>
+        </div>
+              </div>
+          </div>
+      </section>
+{% endif %}
+{% endblock %}

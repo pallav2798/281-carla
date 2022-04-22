@@ -13,6 +13,7 @@ class Trips(models.Model):
     end_time = models.CharField('End Date',max_length=30,default="", null=False)
     time=models.CharField("Time",max_length=20,null=False,default="")
     duration = models.CharField('Duration',max_length=30)
+    price=models.PositiveIntegerField("Price",default=0)
 
 class Transaction(models.Model):
     trip = models.ForeignKey(Trips, null = False,on_delete = models.CASCADE)
