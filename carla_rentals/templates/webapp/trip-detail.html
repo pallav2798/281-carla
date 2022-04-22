@@ -1,0 +1,99 @@
+{% extends 'webapp/base.html' %}
+
+
+{% block content %}
+
+
+
+<section class="ftco-section ftco-no-pt bg-light">
+    <div class="container" style="padding-top: 0%;">
+        <div class="row no-gutters">
+            <div class="col-md-12	featured-top">
+                <div class="row no-gutters">
+                    <div class="col-md-12 d-flex align-items-center" style="bac: red;">
+
+                        <div class=" rounded-right w-100">
+                            <div class="col-md-8" style="margin: auto;">
+                                <div class="car-wrap rounded ftco-animate">
+                                    <div class="img rounded d-flex align-items-end"
+                                        style="background-image: url(/static/images/car-1.jpg);">
+                                    </div>
+                                    <div class="text">
+                                        
+                                        <h2 class="mb-0"><a href="car-single.html">{{car.car_model}}</a></h2>
+                                        <p style="font-weight: bold;">{{car.company}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center mb-5">
+                                <div class="col-md-7 text-center heading-section ftco-animate">
+                                    <h2 class="mb-3">Trip Details</h2>
+                                    <span class="subheading">{{trip.start_time}} - {{trip.end_time}}</span>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
+                                            <div class="text" style="color: black;">
+                                                <h1>Trip info</h1>
+                                                <hr>
+                                                <b>Source : </b> {{trip.source}} <br>
+                                                <b> Destination : </b> {{trip.destination}} <br>
+                                                <b> Start Date : </b> {{trip.start_time}} <br>
+                                                <b> End Date : </b> {{trip.end_time}} <br>
+                                                <b> Amount : </b> {{trip.price}} <br> <br>
+                                                <!-- <p class="d mb-8"><a href="{% url 'home-page'  %}"
+                                                        class="btn btn-primary py-2 mr-1">Edit Trip</a></p> -->
+                                                <!-- <span style="pointer-events: none;" >Unavailable</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
+                                            <div class="text" style="color: black;">
+                                                <h1>Car Info</h1>
+                                                <hr>
+                                                <b> Car Type : </b> {{car.car_type}} <br>
+                                                <b> Car Number : </b> {{car.car_number}} <br>
+                                                <b> Company : </b> {{car.company}} <br>
+                                                <b> Car Model : </b> {{car.car_model}} <br>
+                                                <!-- <b> Price : </b> ${{price}} -->
+                                                 <br> <br>
+                                                <!-- <p class="d mb-8"><a href="{% url 'users_cars_availablity_list' %}"
+                                                        class="btn btn-primary py-2 mr-1">Change Car</a></p> -->
+                                                <!-- <span style="pointer-events: none;" >Unavailable</span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="request-form ftco-animate bg-dark text-primary" >                                
+                                <h1 style="text-align: center; color: rgb(250, 244, 244) ;">Card Details</h1>
+                                <div class="form-group">
+                                    <label for="" class="label">Name of Card Holder</label>
+                                    <input type="text" value="{{transaction.card_name}}" readonly  name="card_name" class="form-control" placeholder="Card Number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Card Number</label>
+                                    <input type="text" name="card_number" value="{{transaction.card_number}}" readonly class="form-control"
+                                        placeholder="Card Number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Amount Paid</label>
+                                    <input type="text" name="card_name" value="{{transaction.amount}}" class="form-control" readonly placeholder="Card Number">
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endblock %}

@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.contrib.sessions.models.Session'
 ]
 
 ROOT_URLCONF = 'carla_rentals.urls'
@@ -91,11 +92,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME':'av-rentals',
+        'NAME':'AV-Rentals',
 
-        'USER': 'sjsu',
+        'USER': 'postgres',
 
-        'PASSWORD': 'admin',
+        'PASSWORD': '1234',
 
         'HOST': 'localhost',
 

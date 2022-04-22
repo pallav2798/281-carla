@@ -30,10 +30,9 @@ class TripHistoryView(View):
         status=None
         for trip in trips:
             amount+=trip.price
-            print(trip.price)
             if trip.status == "True":
                 status=trip
-                print(status)
+
         context={
             "trips":trips,
             "amount":amount,
@@ -58,6 +57,21 @@ class CurrentTripView(View):
             "trip":trip
         }
         return render(request,"webapp/current-trip.html",context)
+
+
+class TripDetailView(View):
+    def get(self,request,pk):
+        trip = Trips.objects.get(id=pk)
+        car = Car.objects.get(id=trip.car.id)
+        transaction = Transaction.objects.get(trip=trip.id)
+
+        context = {
+            "transaction":transaction,
+            "car":car,
+            "trip":trip
+        }
+
+        return render(request,"webapp/trip-detail.html",context)
 
 
 class EndTripView(View):

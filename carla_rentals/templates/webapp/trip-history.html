@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-           
+
         </div>
     </div>
 </section>
@@ -57,21 +57,24 @@
         {% for trip in trips %}
 
         <div class="col-md-4">
+
             <div class="col-md-12" style="margin: auto;">
                 <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
-                    <div class="img d-flex align-items-end"
-                        style="background-image: url(/static/images/car-1.jpg); border-radius: 30px 30px 0px 0px;">
-                    </div>
-                    <div class="text">
-                        <span style="float: right;color: black;" > ${{trip.price}} </span>
-                        <b style="font-weight: bold;color: black;">{{trip.source}}-{{trip.destination}}</b><br>
-                        <b style="font-weight: bold">{{trip.start_time}}-{{trip.end_time}}</b>
-                    </div>
+                    <a href="{% url 'trip-detail' pk=trip.id %}">
+                        <div class="img d-flex align-items-end"
+                            style="background-image: url(/static/images/car-1.jpg); border-radius: 30px 30px 0px 0px;">
+                        </div>
+                        <div class="text">
+                            <span style="float: right;color: black;"> ${{trip.price}} </span>
+                            <b style="font-weight: bold;color: black;">{{trip.source}}-{{trip.destination}}</b><br>
+                            <b style="font-weight: bold">{{trip.start_time}}-{{trip.end_time}}</b>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
         {% endfor %}
-       
+
     </div>
 </div>
 
