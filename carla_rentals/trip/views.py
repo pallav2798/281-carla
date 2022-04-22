@@ -1,3 +1,4 @@
+from re import A
 from django.shortcuts import render
 from .models import Transaction, Trips
 from django.views import View
@@ -21,6 +22,24 @@ class SellerCarTrips(View):
         return render(request, 'webapp/seller-car-trips.html', 
             context={'transactions':trans, 'car_model':car_model, 'car_company':car_company,'price_ph':car_price_ph,'price_pd':car_price_pd})
         
+
+class TripHistoryView(View):
+    def get(self,request):
+        trips = Trips.objects.filter(user=Users.objects.get(user=request.user).id)
+        amount=0
+        status=None
+        for trip in trips:
+            amount+=trip.price
+            print(trip.price)
+            if trip.status == "True":
+                status=trip
+                print(status)
+        context={
+            "trips":trips,
+            "amount":amount,
+            "status":status
+        }
+        return render(request,"webapp/trip-history.html",context)
 
 class CurrentTripView(View):
     def get(self,request,pk):

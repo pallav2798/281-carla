@@ -1,0 +1,80 @@
+{% extends 'webapp/base.html' %}
+
+
+{% block content %}
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+                <h2 class="mb-3">Trip History</h2>
+                <span class="subheading">We keep all records safely</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="services services-2 w-100 text-center">
+                    <div class="icon d-flex align-items-center justify-content-center"><span
+                            class="flaticon-route"></span></div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">Total Spent</h3>
+                        <p>${{amount}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="services services-2 w-100 text-center">
+                    <div class="icon d-flex align-items-center justify-content-center"><span
+                            class="flaticon-route"></span></div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">On going Trip</h3>
+                        {% if status %}
+                        <a href="{% url 'current-trip' pk=request.user.id %}">View on-going trip</a>
+                        {% else %}
+                        <p>No on-going trip</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="services services-2 w-100 text-center">
+                    <div class="icon d-flex align-items-center justify-content-center"><span
+                            class="flaticon-route"></span></div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">Book a new trip</h3>
+                        <a href="{% url 'home-page' %}">Lets Start</a>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+
+        {% for trip in trips %}
+
+        <div class="col-md-4">
+            <div class="col-md-12" style="margin: auto;">
+                <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
+                    <div class="img d-flex align-items-end"
+                        style="background-image: url(/static/images/car-1.jpg); border-radius: 30px 30px 0px 0px;">
+                    </div>
+                    <div class="text">
+                        <span style="float: right;color: black;" > ${{trip.price}} </span>
+                        <b style="font-weight: bold;color: black;">{{trip.source}}-{{trip.destination}}</b><br>
+                        <b style="font-weight: bold">{{trip.start_time}}-{{trip.end_time}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+       
+    </div>
+</div>
+
+
+
+{% endblock %}

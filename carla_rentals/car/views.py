@@ -113,7 +113,8 @@ class BookCarView(View):
         transaction.card_number=request.POST['card_number']
         transaction.card_name=request.POST['card_name']
         transaction.cvv = request.POST['cvv']
-
+        trip.price=transaction.amount
+        
         trip.save()
         transaction.save()
         car.save()

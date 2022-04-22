@@ -41,10 +41,9 @@
                   <li class="nav-item"><a href="{% url 'car_asset' %}" class="nav-link">Add Car</a></li>
                   {% elif request.session.role == 'customer'%}
                   <li class="nav-item"><a href="{% url 'current-trip' pk=request.user.id %}" class="nav-link">Current Trip</a></li>
+                  <li class="nav-item"><a href="{% url 'trip-history'  %}" class="nav-link">Trip History</a></li>
                   {% endif %}                  
 
-                  <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
-                  <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
                   <li class="nav-item"><a href="{% url 'profile' pk=request.session.user_id %}" class="nav-link">Profile</a></li>
                   <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
                 </ul>
