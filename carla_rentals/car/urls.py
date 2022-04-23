@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CarEntity , SellerCarList, UsersCarsList,BookCarView,BookCarPaymentView, UpdateCarDetails, UsersCarsList,BookCarView
+from .views import CarEntity, SellerCarList, UsersCarsList,BookCarView,BookCarPaymentView, UpdateCarDetails, UsersCarsList,BookCarView
 urlpatterns = [
     path('car-asset', CarEntity.as_view(), name='car_asset'),
     path('seller-cars', SellerCarList.as_view(), name='seller_cars'),

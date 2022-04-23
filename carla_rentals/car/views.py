@@ -1,6 +1,4 @@
-from email import contentmanager
-from itertools import count
-from queue import PriorityQueue
+
 # import urlparse
 from django.shortcuts import redirect, render
 from django.views import View
@@ -10,40 +8,52 @@ from car.forms import CreateCarEntity
 from .models import Car
 from users.models import User, Users
 from trip.models import Trips,Transaction
+from carla_rentals.decorators import check_session
+from .serializers import CarSerializer
+
 
 class CarEntity(View):
     
+    @check_session
     def get(self, request):
         return render(request, 'webapp/car-asset.html')
-
+    
+    @check_session
     def post(self, request):
         # form = request.POST
         car_type = request.POST.get('car_type')
         car_number = request.POST.get('car_number')
         car_company = request.POST.get('company')
         car_model = request.POST.get('car_model')
-        price = request.POST.get('price')
+        price_ph = request.POST.get('price_ph')
+        price_pd = request.POST.get('price_pd')
+        car_image = request.FILES['car_image']
+        miles = request.POST.get('miles')
 
-        car = Car(owner = Users.objects.get(user = request.user), car_type = car_type, price = price, 
-                car_number=car_number, car_model= car_model, company = car_company)
+        car = Car(owner = Users.objects.get(user = request.user), car_type = car_type, price_ph = price_ph, price_pd=price_pd, 
+                car_number=car_number, car_model= car_model, company = car_company,miles=miles)
+        car.save()
+        car.car_image = car_image
         car.save()
 
         return redirect('home-view')
 
 class SellerCarList(View):
     
+    @check_session
     def get(self, request):
-        
         cars = Car.objects.filter(owner = Users.objects.get(user = request.user))
-        print(request.user)
-        return render(request, template_name='webapp/seller-car-list.html', context={'cars':cars})
+        serializer  = CarSerializer(cars, many=True)
+        return render(request, template_name='webapp/seller-car-list.html', context={'cars':serializer.data})
 
 class UsersCarsList(View):
 
+    @check_session
     def get(self,request):
         cars = Car.objects.all()
         return render(request, 'webapp/users-available-cars.html', context={"cars":cars} )
 
+    @check_session
     def post(self, request):
         user = Users.objects.get(user = request.user)
         cars = Car.objects.all()
@@ -58,6 +68,8 @@ class UsersCarsList(View):
 
 
 class BookCarPaymentView(View):
+
+    @check_session
     def get(self,request,pk):
         car = Car.objects.get(id=pk)
         context = {
@@ -74,6 +86,9 @@ class BookCarPaymentView(View):
 
 
 class BookCarView(View):
+
+
+    @check_session
     def post(self,request,pk,**kwargs):
         users = Users.objects.get(user=request.user)
 
@@ -96,14 +111,12 @@ class BookCarView(View):
         trip=Trips(car=car,user=users)
         transaction = Transaction(trip=trip)
 
-        car.availability = False
+        users = Users.objects.get(user=request.user)
+        car = Car.objects.get(id=pk)
+        trip=Trips(car=car,user=users)
+        transaction = Transaction(trip=trip)
 
-        trip.status = True
-        trip.source=request.session['source']
-        trip.destination=request.session['destination']
-        trip.start_time=request.session['pickup-date']
-        trip.end_time=request.session['dropoff-date']
-        trip.time=request.session['time']
+        car.availability = False
 
         car_owner=Users.objects.get(id=car.owner_id)
         transaction.payee=car_owner
@@ -114,29 +127,40 @@ class BookCarView(View):
         transaction.card_name=request.POST['card_name']
         transaction.cvv = request.POST['cvv']
         trip.price=transaction.amount
-        
+        trip.status = 'True'
         trip.save()
         transaction.save()
         car.save()
         
-
         return redirect("home-page")
 
-
+        
 class UpdateCarDetails(View):
 
-    def get(self,request, pk):
-        car = Car.objects.get(id=pk)
 
-        return render(request, 'webapp/update-car.html', context={'car':car})
+    @check_session
+    def get(self,request, pk):
     
+        if self.request.user.is_authenticated:
+            car = Car.objects.get(id=pk)
+
+            return render(request, 'webapp/update-car.html', context={'car':car})
+
+        else:
+            return redirect('login-page')
+
+    @check_session
     def post(self, request, pk):
         car = Car.objects.get(id=pk)
         car.car_type = request.POST.get('car_type')
         car.car_number = request.POST.get('car_number')
         car.car_company = request.POST.get('company')
         car.car_model = request.POST.get('car_model')
-        car.price = request.POST.get('price')        
+        car.price_ph = request.POST.get('price_ph')        
+        car.price_pd = request.POST.get('price_pd')   
+        car.miles= request.POST.get('miles')        
+        car.car_image = request.FILES.get('car_image')        
+
         car.save()
         
         return render(request, 'webapp/update-car.html', context={'car':car})

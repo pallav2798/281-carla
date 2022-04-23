@@ -10,19 +10,32 @@
             {% for car in cars %}
             <div class="col-md-6">
                 <div class="car-wrap rounded ftco-animate">
+                    {% if car.car_image %}
+                    <div class="img rounded d-flex align-items-end"
+                        style="background-image: url({{car.car_image}});">
+                    </div>
+
+                    {% else %}
                     <div class="img rounded d-flex align-items-end"
                         style="background-image: url(/static/images/car-1.jpg);">
                     </div>
+                    {% endif %}
+
                     <div class="text">
                         <h2 class="mb-0"><a href="car-single.html">{{car.car_model}}</a></h2>
                         <div class="d mb-8">
                             <p style="font-weight: bold;">{{car.company}}</p>
-                            <p style="font-weight: bold;">Registered On:<span> {{car.timestamp}}</span></p>
+                            <p style="font-weight: bold;">Registered On: <span> {{car.timestamp}}</span></p>
                             <p style="font-weight: bold;">Price/hr:<span> ${{car.price_ph}}</span></p>
                             <p style="font-weight: bold;">Price/day:<span> ${{car.price_pd}}</span></p>
+                            <p style="font-weight: bold;">Total Earnings:<span> ${{car.total_earnings}}</span></p>
+
 
                         </div>
-                        <p class="d mb-8"><a href="{% url 'seller_car_trips' pk=car.id %}" class="btn btn-primary py-2 mr-1">Car Trips taken</a></p>
+                        <p class="d mb-8" style="text-align: center;"><a href="{% url 'seller_car_trips' pk=car.id %}"
+                                class="btn btn-dark py-2 mr-1">Car Trip</a>
+                            <a href="{% url 'update_car' pk=car.id %}" class="btn btn-warning py-2 mr-1"> Update </a>
+                        </p>
                     </div>
                 </div>
             </div>

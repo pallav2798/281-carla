@@ -12,8 +12,8 @@
                 <div class="row no-gutters">
                     <div class="col-md-12 d-flex align-items-center">
                         <div class="services-wrap rounded-right w-100">
-                            <form method="post" action="{% url 'car_asset' %}"
-                                class="request-form ftco-animate bg-primary">
+                            <form method="post" enctype="multipart/form-data" action="{% url 'car_asset' %}"
+                                class="request-form ftco-animate bg-dark">
                                 {% csrf_token %}
                                 <h1 style="text-align: center; color: yellow;">Add Your Car For Rental</h1>
                                 <div class="form-group">
@@ -39,10 +39,23 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">Price Per Hour</label>
-                                    <input type="text" name="price" class="form-control" placeholder="Car Model">
+                                    <input type="text" name="price_ph" class="form-control" placeholder="price per hour">
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Add Car" class="btn btn-warning py-3 px-4">
+                                    <label for="" class="label">Price Per Day</label>
+                                    <input type="text" name="price_pd" class="form-control" placeholder="price per day">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Miles Driven</label>
+                                    <input type="text" name="miles" class="form-control" placeholder="Miles">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Car Image Upload</label>
+                                    <input type="file" name="car_image" class="form-control" placeholder="Car Image">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Add Car" class="btn btn-success py-3 px-4">
                                 </div>
                             </form>
                         </div>

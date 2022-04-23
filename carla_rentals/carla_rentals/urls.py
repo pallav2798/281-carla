@@ -19,7 +19,7 @@ from users import urls as users_url
 from users import views as users_views
 from django.conf.urls.static import static
 from django.conf import settings
-
+from users.views import ServerError
 
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     path('users/', include(users_url)),
     path('car/', include('car.urls')),
     path('trip/', include('trip.urls')),
+    path('404-not-found/', ServerError.as_view(),name= '404_page' )
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

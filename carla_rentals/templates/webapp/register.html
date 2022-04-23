@@ -20,7 +20,7 @@
 							{% endfor %}
 						{% endif %}
 
-						<form method="post" class="request-form ftco-animate bg-primary">
+						<form method="post" class="request-form ftco-animate bg-dark">
 							{% csrf_token %}
 							<h2>Register Here</h2>
 							<div class="form-group">
@@ -35,10 +35,7 @@
 								<label for="" class="label">Email</label>								
 								{{form.user_email}}
 							</div>
-							<div class="form-group">
-								<label for="" class="label">Role</label>								
-								{{form.role}}
-							</div>
+
 							<div class="form-group">
 								<label for="" class="label">Password</label>								
 								{{form.password}}
@@ -48,7 +45,31 @@
 								{{form.cpassword}}
 							</div>
 							<div class="form-group">
-								<input type="submit" value="Register" class="btn btn-secondary py-3 px-4">
+								<label for="" class="label">Contact Number</label>								
+								{{form.contact_number}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Street</label>								
+								{{form.street}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Street 2</label>								
+								{{form.street_2}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">City</label>								
+								{{form.city}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">State</label>								
+								{{form.state}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Zip</label>								
+								{{form.zip}}
+							</div>
+							<div class="form-group">
+								<input type="submit" value="Register" class="btn btn-success py-3 px-4">
 							</div>
 						</form>
 					</div>

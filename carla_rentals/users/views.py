@@ -11,8 +11,11 @@ from .forms import RegistrationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout
 from .models import Users
+from carla_rentals.decorators import check_session
 
 class HomeView(View):
+
+    
     def get(self, request):
         if(not request.user.is_authenticated):
             return render(request, "webapp/login.html")    
@@ -25,6 +28,7 @@ class RegisterView(FormView):
     success_url = reverse_lazy("login-page")
 
 
+    
     def post(self, request, *args, **kwargs) :
         form = self.get_form()
         if form.is_valid():
@@ -79,6 +83,7 @@ class LoginView(TemplateView):
                 users_obj = Users.objects.get(user=user.id)
                 request.session['role'] = users_obj.role
                 request.session['user_id'] = users_obj.id 
+
                 if users_obj.role == 'Seller':
                     return redirect('car_asset')
                 else:
@@ -87,7 +92,6 @@ class LoginView(TemplateView):
             else:
                 return render(request, 'webapp/login.html',{"error":"Wrong Credentials"})
         except Exception as e:
-            print(e)
             return render(request,'webapp/404-page.html')
 
 
@@ -98,11 +102,28 @@ class ProfileView(UpdateView):
     success_url = '/users/home-page' 
 
 
+    @check_session
+    def post(self, request,pk):
 
-class BookRide(View):
+        if self.request.user.is_authenticated:
+            user = Users.objects.get(id = pk)
+            user.first_name = self.request.POST.get('first_name')
+            user.last_name = self.request.POST.get('last_name')
+            user.contact_number = self.request.POST.get('contact_number')
+            user.street = self.request.POST.get('street')
+            user.street_2 = self.request.POST.get('street_2')
+            user.city= self.request.POST.get('city')
+            user.state = self.request.POST.get('state')
+            user.zip = self.request.POST.get('zip')
+            user.save()
 
-    def post(self, request):
-        form = request.POST
+            return redirect('profile',pk=pk)
+        
+        else:
+            return redirect('login-page')
 
+class ServerError(View):
 
-    
+    def get(self, request):
+        print('------------')
+        return render(request, 'webapp/404-page.html')

@@ -6,21 +6,30 @@
 
 
 <section class="ftco-section ftco-car-details">
-    <div class="container">
+    <div class="container" style="position: relative; align-items: center;">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="car-details">
-                    <div class="img" style="background-image: url(/static/images/bg_1.jpg);"></div>
+            <div class="col-md-12">
+                <div class="car-details" style="position: relative; place-items: center;">
+                    {% if car.car_image %}
+                    <div class="img rounded d-flex align-items-end "
+                        style="background-image: url({{car.car_image.url}}); position: relative; place-items: center;">
+                    </div>
+
+                    {% else %}
+                    <div class="img rounded d-flex align-items-end"
+                        style="background-image: url(/static/images/car-1.jpg);position: relative; place-items: center;">
+                    </div>
+                    {% endif %}
                     <div class="text text-center" style="background-color: black;">
                         <!-- <span class="subheading" style="color: whitesmoke;">Cheverolet</span> -->
                         <h2 style="color: whitesmoke;">{{car.car_company}}</h2>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                         <div class="rounded-right">
-                            <form method="post" action="{% url 'update_car' pk=car.id %}"
-                                class="request-form ftco-animate bg-primary">
+                            <form method="post" enctype="multipart/form-data" action="{% url 'update_car' pk=car.id %}"
+                                class="request-form ftco-animate bg-dark">
                                 {% csrf_token %}
                                 <h2 style="text-align: center; color: yellow;">Update Your Car </h2>
                                 <div class="form-group">
@@ -46,10 +55,22 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">Price Per Hour</label>
-                                    <input type="text" name="price" class="form-control" value="{{car.price}}">
+                                    <input type="text" name="price_ph" class="form-control" value="{{car.price_ph}}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="Update Car" class="btn btn-warning py-3 px-4">
+                                    <label for="" class="label">Price Per Day</label>
+                                    <input type="text" name="price_pd" class="form-control" value="{{car.price_pd}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Miles Driven</label>
+                                    <input type="text" name="miles" class="form-control" placeholder="Miles">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="label">Car Image Upload</label>
+                                    <input type="file" name="car_image" class="form-control" placeholder="Car Image">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Update Car" class="btn btn-success py-3 px-4">
                                 </div>
                             </form>
                     
@@ -67,7 +88,7 @@
                             <div class="text">
                                 <h3 class="heading mb-0 pl-3">
                                     Mileage
-                                    <span>40,000</span>
+                                    <span>{{car.miles}}</span>
                                 </h3>
                             </div>
                         </div>

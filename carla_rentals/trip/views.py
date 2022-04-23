@@ -4,11 +4,13 @@ from .models import Transaction, Trips
 from django.views import View
 from users.models import Users
 from car.models import Car
+from carla_rentals.decorators import check_session
 from django.shortcuts import redirect, render, get_object_or_404
 # from .serializers 
 
 class SellerCarTrips(View):
 
+    @check_session
     def get(self, request, pk):
         user = request.user
         trans = Transaction.objects.filter(trip__car__id =pk) 
@@ -42,6 +44,9 @@ class TripHistoryView(View):
         return render(request,"webapp/trip-history.html",context)
 
 class CurrentTripView(View):
+
+
+    @check_session
     def get(self,request,pk):
         users = Users.objects.get(user=pk)
         trip = Trips.objects.filter(user=users).filter(status=True)
@@ -75,6 +80,9 @@ class TripDetailView(View):
 
 
 class EndTripView(View):
+
+
+    @check_session
     def get(self,request,pk):
         trip = Trips.objects.get(id=pk)
         trip.status = False

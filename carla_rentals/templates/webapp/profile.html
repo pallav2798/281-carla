@@ -19,7 +19,7 @@
 							{% endfor %}
 						{% endif %}
 
-						<form method="post" class="request-form ftco-animate bg-primary">
+						<form method="post" class="request-form ftco-animate bg-dark">
 							{% csrf_token %}
 							<h2 style="text-align: center;">Update Profile</h2>
 							<div class="form-group">
@@ -36,11 +36,34 @@
 							</div>
 							<div class="form-group">
 								<label for="" class="label">Role</label>								
-								{{form.role}}
+								<input type="text" name="role" class="form-control" disabled value="{{request.session.role}}">
 							</div>
-				
 							<div class="form-group">
-								<input type="submit" value="Update" class="btn btn-warning py-3 px-4">
+								<label for="" class="label">Contact Number</label>								
+								{{form.contact_number}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Street</label>								
+								{{form.street}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Street 2</label>								
+								{{form.street_2}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">City</label>								
+								{{form.city}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">State</label>								
+								{{form.state}}
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Zip</label>								
+								{{form.zip}}
+							</div>
+							<div class="form-group">
+								<input type="submit" value="Update" class="btn btn-success py-3 px-4">
 							</div>
 						</form>
 					</div>

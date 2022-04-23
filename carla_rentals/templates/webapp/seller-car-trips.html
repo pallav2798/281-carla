@@ -20,6 +20,8 @@
                     <th> Start Date</th>
                     <th> Start Time</th>
                     <th> End Date</th>
+                    <th> Trip Status</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -35,6 +37,14 @@
                     <td> {{trans.trip.start_time}}</td>
                     <td> {{trans.trip.time}}</td>
                     <td> {{trans.trip.end_time}}</td>
+                    {% if trans.trip.status %}
+                    
+                    <td class="btn-primary"> In-Progress </td>
+                    {% else %}
+                    <td class="btn-success"> Completed </td>
+                    {% endif %}
+
+
 
                 </tr>
                 {% endfor%}
