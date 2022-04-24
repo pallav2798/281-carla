@@ -10,9 +10,9 @@
         <div class="row no-gutters">
           <div class="col-md-4 d-flex align-items-center">
             <form method="post" action="{% url 'users_cars_availablity_list' %}"
-              class="request-form ftco-animate bg-primary">
+              class="request-form ftco-animate bg-dark">
               {% csrf_token %}
-              <h2>Hello, {{request.user.first_name}} {# {{request.session.role}} #} </h2>
+              <h2>Hello, {{request.user.first_name}} </h2>
               <div class="form-group">
                 <label for="" class="label">Pick-up location</label>
                 <input type="text" required class="form-control" name="source" placeholder="Source">
@@ -39,7 +39,7 @@
               </div>
 
               <div class="form-group">
-                <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
+                <input type="submit" value="Rent A Car Now" class="btn btn-success py-3 px-4">
               </div>
             </form>
           </div>

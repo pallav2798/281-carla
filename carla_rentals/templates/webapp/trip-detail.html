@@ -15,11 +15,18 @@
                         <div class=" rounded-right w-100">
                             <div class="col-md-8" style="margin: auto;">
                                 <div class="car-wrap rounded ftco-animate">
-                                    <div class="img rounded d-flex align-items-end"
-                                        style="background-image: url(/static/images/car-1.jpg);">
+                                    {% if car.car_image %}
+                                    <div class="img rounded d-flex align-items-end "
+                                        style="background-image: url({{car.car_image.url}}); position: relative; place-items: center;">
                                     </div>
+
+                                    {% else %}
+                                    <div class="img rounded d-flex align-items-end"
+                                        style="background-image: url(/static/images/car-1.jpg);position: relative; place-items: center;">
+                                    </div>
+                                    {% endif %}
                                     <div class="text">
-                                        
+
                                         <h2 class="mb-0"><a href="car-single.html">{{car.car_model}}</a></h2>
                                         <p style="font-weight: bold;">{{car.company}}</p>
                                     </div>
@@ -35,7 +42,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
 
-                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
+                                        <div class="car-wrap ftco-animate"
+                                            style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
                                             <div class="text" style="color: black;">
                                                 <h1>Trip info</h1>
                                                 <hr>
@@ -51,7 +59,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
+                                        <div class="car-wrap ftco-animate"
+                                            style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
                                             <div class="text" style="color: black;">
                                                 <h1>Car Info</h1>
                                                 <hr>
@@ -60,7 +69,7 @@
                                                 <b> Company : </b> {{car.company}} <br>
                                                 <b> Car Model : </b> {{car.car_model}} <br>
                                                 <!-- <b> Price : </b> ${{price}} -->
-                                                 <br> <br>
+                                                <br> <br>
                                                 <!-- <p class="d mb-8"><a href="{% url 'users_cars_availablity_list' %}"
                                                         class="btn btn-primary py-2 mr-1">Change Car</a></p> -->
                                                 <!-- <span style="pointer-events: none;" >Unavailable</span> -->
@@ -71,23 +80,25 @@
                             </div>
 
 
-                            <div class="request-form ftco-animate bg-dark text-primary" >                                
+                            <div class="request-form ftco-animate bg-dark text-primary">
                                 <h1 style="text-align: center; color: rgb(250, 244, 244) ;">Card Details</h1>
                                 <div class="form-group">
                                     <label for="" class="label">Name of Card Holder</label>
-                                    <input type="text" value="{{transaction.card_name}}" readonly  name="card_name" class="form-control" placeholder="Card Number">
+                                    <input type="text" value="{{transaction.card_name}}" readonly name="card_name"
+                                        class="form-control" placeholder="Card Number">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">Card Number</label>
-                                    <input type="text" name="card_number" value="{{transaction.card_number}}" readonly class="form-control"
-                                        placeholder="Card Number">
+                                    <input type="text" name="card_number" value="{{transaction.card_number}}" readonly
+                                        class="form-control" placeholder="Card Number">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">Amount Paid</label>
-                                    <input type="text" name="card_name" value="{{transaction.amount}}" class="form-control" readonly placeholder="Card Number">
+                                    <input type="text" name="card_name" value="{{transaction.amount}}"
+                                        class="form-control" readonly placeholder="Card Number">
                                 </div>
 
-                                
+
                             </div>
                         </div>
                     </div>

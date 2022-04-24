@@ -53,7 +53,7 @@ class CurrentTripView(View):
 
         if trip.count()==0:
             return render(request,"webapp/current-trip.html")   
-        
+            
         trip=trip[0]
         car = Car.objects.get(id=trip.car.id)     
         
@@ -61,6 +61,7 @@ class CurrentTripView(View):
             "car":car,
             "trip":trip
         }
+        
         return render(request,"webapp/current-trip.html",context)
 
 

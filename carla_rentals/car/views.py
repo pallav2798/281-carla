@@ -72,16 +72,24 @@ class BookCarPaymentView(View):
     @check_session
     def get(self,request,pk):
         car = Car.objects.get(id=pk)
-        context = {
-            'car':car,
-            "source":request.session['source'],
-            "destination":request.session['destination'],
-            "start_date":request.session['pickup-date'],
-            "end_date":request.session['dropoff-date'],
-            "time":request.session['time'],
-            "price":request.GET['price']
-        }
+        users = Users.objects.get(user=request.user)
         
+        trip = Trips.objects.filter(user=users).filter(status=True)
+        context = {
+                'cars':Car.objects.all(),
+                "source":request.session['source'],
+                "destination":request.session['destination'],
+                "start_date":request.session['pickup-date'],
+                "end_date":request.session['dropoff-date'],
+                "time":request.session['time'],
+                "price":request.GET['price']
+            }
+        
+        if trip.count()>0:
+            context['error'] = "You already have an on going trip. End that trip to book a new one"
+            return render(request, 'webapp/users-available-cars.html', context )
+            
+            
         return render(request,"webapp/book-car-payment.html",context)
 
 
@@ -109,11 +117,17 @@ class BookCarView(View):
 
         
         trip=Trips(car=car,user=users)
+        trip.status = True
+        trip.source = request.session['source']
+        trip.destination = request.session['destination']
+        trip.start_time = request.session['pickup-date']
+        trip.end_time = request.session['dropoff-date']
+        trip.time = request.session['time']
+
         transaction = Transaction(trip=trip)
 
         users = Users.objects.get(user=request.user)
         car = Car.objects.get(id=pk)
-        trip=Trips(car=car,user=users)
         transaction = Transaction(trip=trip)
 
         car.availability = False

@@ -93,13 +93,13 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME':'av-rentals',
+        'NAME':'carla-rentals',
 
-        'USER': 'sjsu',
+        'USER': 'postgres',
 
         'PASSWORD': 'admin',
 
-        'HOST': 'localhost',
+        'HOST': '34.94.188.126',
 
         'PORT': '5432',
 

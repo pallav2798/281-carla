@@ -84,7 +84,7 @@ class LoginView(TemplateView):
                 request.session['role'] = users_obj.role
                 request.session['user_id'] = users_obj.id 
 
-                if users_obj.role == 'Seller':
+                if users_obj.role == 'seller':
                     return redirect('car_asset')
                 else:
                     return redirect('home-page' )

@@ -15,11 +15,18 @@
                         <div class=" rounded-right w-100">
                             <div class="col-md-8" style="margin: auto;">
                                 <div class="car-wrap rounded ftco-animate">
-                                    <div class="img rounded d-flex align-items-end"
-                                        style="background-image: url(/static/images/car-1.jpg);">
+                                    {% if car.car_image %}
+                                    <div class="img rounded d-flex align-items-end "
+                                        style="background-image: url({{car.car_image.url}}); position: relative; place-items: center;">
                                     </div>
+
+                                    {% else %}
+                                    <div class="img rounded d-flex align-items-end"
+                                        style="background-image: url(/static/images/car-1.jpg);position: relative; place-items: center;">
+                                    </div>
+                                    {% endif %}
                                     <div class="text">
-                                        
+
                                         <h2 class="mb-0"><a href="car-single.html">{{car.car_model}}</a></h2>
                                         <p style="font-weight: bold;">{{car.company}}</p>
                                     </div>
@@ -30,7 +37,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
 
-                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
+                                        <div class="car-wrap ftco-animate"
+                                            style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
                                             <div class="text" style="color: black;">
                                                 <h1>Trip info</h1>
                                                 <hr>
@@ -46,7 +54,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
+                                        <div class="car-wrap ftco-animate"
+                                            style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
                                             <div class="text" style="color: black;">
                                                 <h1>Car Info</h1>
                                                 <hr>
@@ -64,16 +73,9 @@
                                 </div>
                             </div>
 
-                            {% if error %}
-                            <div class="alert alert-danger">
-                                <strong> {{ error|escape }}</strong>
-                            </div>
-                            
-                            {% endif %}
-                            
 
                             <form method="post" action="{% url 'book-car' pk=car.id %}?price={{price}}"
-                                class="request-form ftco-animate bg-dark text-primary" >
+                                class="request-form ftco-animate bg-dark text-primary">
                                 {% csrf_token %}
                                 <h1 style="text-align: center; color: rgb(250, 244, 244) ;">Payment Plan</h1>
                                 <div class="form-group">
@@ -83,7 +85,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">Name on Card</label>
-                                    <input type="text" required name="card_name" class="form-control" placeholder="Card Number">
+                                    <input type="text" required name="card_name" class="form-control"
+                                        placeholder="Card Number">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="label">CVV</label>

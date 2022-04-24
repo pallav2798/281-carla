@@ -8,6 +8,14 @@
         <div class="row">
             <div class="col-md-12 ftco-animate">
                 <div class="car-list">
+
+                    {% if error %}
+                    <div class="alert alert-danger">
+                        <strong> {{ error|escape }}</strong>
+                    </div>
+
+                    {% endif %}
+
                     <table class="table">
                         <thead class="thead-primary">                            
                             <tr class="text-center">
@@ -21,7 +29,16 @@
                             {% for car in cars %}
                             <tr class="">
                                 <td class="car-image">
-                                    <div class="img" style="background-image: url(/static/images/car-1.jpg);"></div>
+                                    {% if car.car_image %}
+                                    <div class="img rounded d-flex align-items-end"
+                                        style="background-image: url({{car.car_image.url}}); position: relative; place-items: center;">
+                                    </div>
+                
+                                    {% else %}
+                                    <div class="img rounded d-flex align-items-end"
+                                        style="background-image: url(/static/images/car-1.jpg);position: relative; place-items: center;">
+                                    </div>
+                                    {% endif %}
                                 </td>
                                 <td class="product-name" style="color: black;" >
                                     <h3>{{car.company}} {{car.car_type}} </h3>
@@ -31,7 +48,7 @@
                                         
                                     </p>
                                 </td>
-
+                                
                                 <td class="price">
                                     <p class="btn-custom"><a href="{% url 'book-car-payment' pk=car.id %}?price={{car.price_pd}}">Rent a car</a></p>
                                     <div class="price-rate">
@@ -63,36 +80,5 @@
     </div>
 </section>
 
-
-<section class="ftco-section bg-light">
-    <div class="container">
-        <div class="row">
-            {% for car in cars %}
-            <div class="col-md-6">
-                <div class="car-wrap rounded ftco-animate">
-                    <div class="img rounded d-flex align-items-end"
-                        style="background-image: url(/static/images/car-1.jpg);">
-                    </div>
-                    <div class="text">
-                        {# {% if car.availability %} #}
-                        <b style="float:right;color: black;">${{car.price}}</b>
-                        {# {% endif %} #}
-                        <h2 class="mb-0"><a href="car-single.html">{{car.car_model}}</a></h2>
-                        <p style="font-weight: bold;">{{car.company}}</p>
-
-                        {# {% if car.availability %} #}
-                        <p class="d mb-8"><a href="{% url 'book-car-payment' pk=car.id %}"
-                                class="btn btn-primary py-2 mr-1">Book Now</a></p>
-                        {# {% else %} #}
-                        <!-- <span style="pointer-events: none;" >Unavailable</span> -->
-                        {# {% endif %} #}
-
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
 
 {% endblock %}
