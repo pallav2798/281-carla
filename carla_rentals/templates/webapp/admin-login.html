@@ -1,0 +1,44 @@
+{% extends 'webapp/base.html' %}
+
+
+{% block content %}
+
+<section class="ftco-section ftco-no-pt bg-light">
+	<div class="container">
+		<div class="row no-gutters">
+			<div class="col-md-12	featured-top">
+				<div class="row no-gutters">
+					<div class="col-md-12 d-flex align-items-center">
+						<form method="post"  class="request-form ftco-animate bg-dark">
+							{% csrf_token %}
+							<h2>ADMIN LOGIN</h2>
+							{% if error %}
+							<div class="alert alert-danger">
+								<strong>{{ error|escape }}</strong>
+							</div>
+							{% endif %}
+							
+							<div class="form-group">
+								<label for="" class="label">Username</label>
+								<input type="text" name="username" class="form-control" placeholder="Enter username">
+							</div>
+							<div class="form-group">
+								<label for="" class="label">Password</label>
+								<input type="password" name="password" class="form-control" placeholder="Enter Password">
+							</div>
+							
+							<div class="form-group">
+								<input type="submit" value="Login" class="btn btn-success py-3 px-4">
+							</div>							
+					
+						</form>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+{% endblock %}

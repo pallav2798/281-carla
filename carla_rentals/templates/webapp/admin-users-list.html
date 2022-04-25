@@ -1,0 +1,101 @@
+{% extends 'webapp/base.html' %}
+
+
+{% block content %}
+
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        {% if role == "customer" %}
+        <h1 style="text-align: center;">All Active Customers</h1>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="row">#</th>
+                    <th>customer's Email</th>
+                    <th> customer's First Name</th>
+                    <th> customer's Last Name</th>
+                    <th> customer's Contact Number</th>
+
+                    <th> customer's ID</th>
+                    <th>Total Earnings Till Date</th>
+                    <th></th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr >
+                    <td scope="row"><b>{{ forloop.counter }}</b></td>
+                    <td>{{customer.user_email}}</td>&nbsp;
+                    <td>{{customer.first_name}}</td>
+                    <td>{{customer.last_name}}</td>
+                    
+                    <td> {{customer.contact_number}}</td>
+                    <td> {{customer.id}}</td>
+
+                    <td>${{customer.earnings}}</td>
+
+                    <td><a href="{% url 'admin_customer_carslist' pk=customer.id %}" style="margin:10px" class="btn btn-primary">View Cars</a>  </td>
+                    <td><a href="{% url 'profile' pk=customer.id %}" class="btn btn-secondary">View Profile</a>  </td>
+
+                </tr>
+                {% endfor%}
+
+            </tbody>
+        </table>
+
+        {% else %}
+        <h1 style="text-align: center;">All Active Sellers</h1>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="row">#</th>
+                    <th>Seller's Email</th>
+                    <th> Seller's First Name</th>
+                    <th> Seller's Last Name</th>
+                    <th> Seller's Contact Number</th>
+
+                    <th> Seller's ID</th>
+                    <th>Total Earnings Till Date</th>
+                    <th></th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for seller in sellers %}
+                <tr >
+                    <td scope="row"><b>{{ forloop.counter }}</b></td>
+                    <td>{{seller.user_email}}</td>&nbsp;
+                    <td>{{seller.first_name}}</td>
+                    <td>{{seller.last_name}}</td>
+                    
+                    <td> {{seller.contact_number}}</td>
+                    <td> {{seller.id}}</td>
+
+                    <td>${{seller.earnings}}</td>
+
+                    <td><a href="{% url 'admin_seller_carslist' pk=seller.id %}" style="margin:10px" class="btn btn-primary">View Cars</a>  </td>
+                    <td><a href="{% url 'profile' pk=seller.id %}" class="btn btn-secondary">View Profile</a>  </td>
+
+                </tr>
+                {% endfor%}
+
+            </tbody>
+        </table>
+
+        {% endif %}
+
+
+    </div>
+</section>
+<style>
+    th,td{
+        text-align: center;
+    }
+
+</style>
+
+{% endblock %}
