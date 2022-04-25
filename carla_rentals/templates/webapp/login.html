@@ -9,7 +9,7 @@
 			<div class="col-md-12	featured-top">
 				<div class="row no-gutters">
 					<div class="col-md-6 d-flex align-items-center">
-						<form method="post"  class="request-form ftco-animate bg-dark">
+						<form method="post"  action = "{% url 'login-page' %}" class="request-form ftco-animate bg-dark">
 							{% csrf_token %}
 							<h2>Login to access Carla AV Rentals</h2>
 							{% if error %}

@@ -35,9 +35,9 @@
                     <td> {{customer.contact_number}}</td>
                     <td> {{customer.id}}</td>
 
-                    <td>${{customer.earnings}}</td>
+                    <td>${{customer.spendings}}</td>
 
-                    <td><a href="{% url 'admin_customer_carslist' pk=customer.id %}" style="margin:10px" class="btn btn-primary">View Cars</a>  </td>
+                    <td><a href="{% url 'admin_customer_tripslist' pk=customer.id %}" style="margin:10px" class="btn btn-primary">View Cars</a>  </td>
                     <td><a href="{% url 'profile' pk=customer.id %}" class="btn btn-secondary">View Profile</a>  </td>
 
                 </tr>

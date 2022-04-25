@@ -17,7 +17,7 @@ class HomeView(View):
     
     def get(self, request):
         if(not request.user.is_authenticated):
-            return render(request, "webapp/login.html")    
+            return redirect('login-page')    
         return render(request, 'webapp/user-home.html')
 
 
@@ -196,3 +196,6 @@ class AdminCustomersList(View):
 
         serializer  = CustomerListSerializer(customers, many=True)
         return render(request, 'webapp/admin-users-list.html', context={'customers':serializer.data, 'role':'customer'})
+
+
+# class AdminCustomerTripsList(View):

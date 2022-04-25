@@ -28,8 +28,8 @@
                 {% for trans in transactions %}
                 <tr >
                     <td scope="row"><b>{{ forloop.counter }}</b></td>
-                    <td>{{car_model}}</td>&nbsp;
-                    <td>{{car_company}}</td>
+                    <td>{{trans.trip.car.car_model}}</td>&nbsp;
+                    <td>{{trans.trip.car.company}}</td>
                     <td>${{trans.amount}}</td>
 
                     <td> {{trans.trip.source}}</td>
@@ -37,7 +37,7 @@
                     <td> {{trans.trip.start_time}}</td>
                     <td> {{trans.trip.time}}</td>
                     <td> {{trans.trip.end_time}}</td>
-                    {% if trans.trip.status %}
+                    {% if trans.trip.status == 'True' %}
                     
                     <td class="btn-primary"> In-Progress </td>
                     {% else %}
