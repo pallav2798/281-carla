@@ -76,6 +76,7 @@ class BookCarPaymentView(View):
         
         trip = Trips.objects.filter(user=users).filter(status=True)
         context = {
+                'car': car,
                 'cars':Car.objects.all(),
                 "source":request.session['source'],
                 "destination":request.session['destination'],
@@ -172,8 +173,9 @@ class UpdateCarDetails(View):
         car.car_model = request.POST.get('car_model')
         car.price_ph = request.POST.get('price_ph')        
         car.price_pd = request.POST.get('price_pd')   
-        car.miles= request.POST.get('miles')        
-        car.car_image = request.FILES.get('car_image')        
+        car.miles= request.POST.get('miles')     
+        if request.FILES.get('car_image'):
+            car.car_image = request.FILES.get('car_image')        
 
         car.save()
         

@@ -11,6 +11,7 @@ from .models import Users
 from carla_rentals.decorators import check_session
 from car.models import Car
 from car.serializers import CarSerializer, CustomerListSerializer, SellersListSerializer
+from trip.models import Transaction, Trips
 
 class HomeView(View):
 
@@ -92,6 +93,10 @@ class LoginView(TemplateView):
 
                 if users_obj.role == 'seller':
                     return redirect('car_asset')
+
+                elif users_obj.role == 'admin':
+                    return redirect('admin_home')
+                    
                 else:
                     return redirect('home-page' )
 
@@ -138,6 +143,21 @@ class ServerError(View):
 
     def get(self, request):
         return render(request, 'webapp/404-page.html')
+
+class AdminHomeView(View):
+
+    def get(self, request):
+        context = {}
+        context['cars'] = Car.objects.all().count()
+        context['sellers'] = Users.objects.filter(role = 'seller').count()
+        context['customers'] = Users.objects.filter(role = 'customer').count()
+        context['trips'] = Trips.objects.all().count()
+        context['transactions'] = Transaction.objects.all().count()
+        context['total_earnings'] = sum(Transaction.objects.all().values_list('amount', flat=True))
+
+
+        return render(request, 'webapp/admin-login.html', context=context)
+
 
 class AdminLoginView(View):
 

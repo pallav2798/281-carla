@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import  AdminCustomersList, AdminLoginView, AdminSellerCarList, AdminSellerList, HomeView, LoginView, ProfileView, RegisterView, LogoutView
+from .views import  AdminCustomersList, AdminHomeView, AdminLoginView, AdminSellerCarList, AdminSellerList, HomeView, LoginView, ProfileView, RegisterView, LogoutView
 from trip.views import AdminCustomerTripsList
 
 urlpatterns = [
@@ -9,6 +9,8 @@ urlpatterns = [
     path('logout', LogoutView.as_view(), name="logout"),
     path('profile/<int:pk>', ProfileView.as_view(), name="profile"),
     path('admin/login', AdminLoginView.as_view(), name="admin_login"),
+    path('admin/home', AdminHomeView.as_view(), name="admin_home"),
+
     path('admin/sellers-list', AdminSellerList.as_view(), name="admin_sellerslist"),
     path('admin/customer-list', AdminCustomersList.as_view(), name="admin_customerslist"),
     path('admin/customer-trips-list/<int:pk>', AdminCustomerTripsList.as_view(), name="admin_customer_tripslist"),

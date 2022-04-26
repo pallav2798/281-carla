@@ -5,39 +5,29 @@
 
 <section class="ftco-section ftco-no-pt bg-light">
 	<div class="container">
-		<div class="row no-gutters">
-			<div class="col-md-12	featured-top">
-				<div class="row no-gutters">
-					<div class="col-md-12 d-flex align-items-center">
-						<form method="post"  class="request-form ftco-animate bg-dark">
-							{% csrf_token %}
-							<h2>ADMIN LOGIN</h2>
-							{% if error %}
-							<div class="alert alert-danger">
-								<strong>{{ error|escape }}</strong>
-							</div>
-							{% endif %}
-							
-							<div class="form-group">
-								<label for="" class="label">Username</label>
-								<input type="text" name="username" class="form-control" placeholder="Enter username">
-							</div>
-							<div class="form-group">
-								<label for="" class="label">Password</label>
-								<input type="password" name="password" class="form-control" placeholder="Enter Password">
-							</div>
-							
-							<div class="form-group">
-								<input type="submit" value="Login" class="btn btn-success py-3 px-4">
-							</div>							
-					
-						</form>
+
+		<div style="align-content: center; align-items: center;">
+			<div style="align-self: center; " class="col-md-8">
+
+				<div class="car-wrap ftco-animate" style="box-shadow: 6px 4px 4px 4px; border-radius: 30px;">
+					<div class="text" style="color: black;text-align: center;">
+						<h1>Admin Stats</h1>
+						<hr>
+						<b>Total No. of Cars: </b> {{cars}} <br>
+						<b>Total No. of Seller : </b> {{sellers}} <br>
+						<b>Total No. of Customers: </b> {{customers}} <br>
+						<b>Total No. of Trips Taken: </b> {{trips}} <br>
+						<b>Total No. of Transactions: </b> {{transactions}} <br>
+						<b>Total Amount of Earnings: </b> {{total_earnings}} <br> <br>
+						<a href="{% url 'admin_sellerslist' %}" class="btn btn-primary">Active Car Sellers </a>
+						<a href="{% url 'admin_customerslist' %}" class="btn btn-primary">Active Customers </a>
+
+
 					</div>
-					
 				</div>
 			</div>
 		</div>
-	</div>
+
 </section>
 
 

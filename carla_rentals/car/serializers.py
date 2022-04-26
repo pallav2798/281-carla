@@ -17,6 +17,7 @@ class CarSerializer(serializers.ModelSerializer):
 
     def get_car_image(self, obj):
         if obj.car_image:
+            print(obj)
             return obj.car_image.url
         else:
             return '/static/images/car-8.jpg'
