@@ -87,25 +87,7 @@ WSGI_APPLICATION = 'carla_rentals.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-DATABASES = {
-
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME':'carla-rentals',
-
-        'USER': 'postgres',
-
-        'PASSWORD': 'admin',
-
-        'HOST': '34.94.188.126',
-
-        'PORT': '5432',
-
-    }
-
-}
+DATABASES = env('DATABASE')
 
 
 
