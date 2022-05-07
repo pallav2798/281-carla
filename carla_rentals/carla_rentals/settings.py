@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-7pqor!p_60wp99i9+q3au65_6iagwy7(4vo(7b_+y0it0#nunf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 # Application definition
 
@@ -87,7 +87,8 @@ WSGI_APPLICATION = 'carla_rentals.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-DATABASES = env('DATABASE')
+DATABASES={"default": { "ENGINE": "django.db.backends.postgresql_psycopg2", "NAME":"carla-rentals", "USER": "postgres", "PASSWORD": "admin", "HOST": "34.94.188.126", "PORT": "5432"} }
+
 
 
 
