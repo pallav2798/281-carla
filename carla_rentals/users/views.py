@@ -156,13 +156,13 @@ class AdminHomeView(View):
         context['total_earnings'] = sum(Transaction.objects.all().values_list('amount', flat=True))
 
 
-        return render(request, 'webapp/admin-login.html', context=context)
+        return render(request, 'webapp/admin-analysis.html', context=context)
 
 
 class AdminLoginView(View):
 
     def get(self, request):
-        return render(request, 'webapp/admin-login.html')
+        return render(request, 'webapp/admin-analysis.html')
 
     def post(self, request):
         username = request.POST.get('username')
@@ -180,7 +180,7 @@ class AdminLoginView(View):
                 if users_obj.role == 'admin':
                     return redirect('admin_home')
                 else:
-                    return render(request, 'webapp/admin-login.html',{"error":"You are not an authorized to login as Admin"} )
+                    return render(request, 'webapp/login.html',{"error":"You are not an authorized to login as Admin"} )
 
 
             else:
@@ -218,4 +218,9 @@ class AdminCustomersList(View):
         return render(request, 'webapp/admin-users-list.html', context={'customers':serializer.data, 'role':'customer'})
 
 
-# class AdminCustomerTripsList(View):
+class AdminAnalysis(View):
+
+    # @check_session
+    def get(self,request):
+        return render(request, 'webapp/admin-analysis.html')
+

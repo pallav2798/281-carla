@@ -45,6 +45,7 @@
                   {% elif request.session.role == 'admin'%}
                   <li class="nav-item"><a href="{% url 'admin_sellerslist' %}" class="nav-link">Active Car Sellers </a></li>
                   <li class="nav-item"><a href="{% url 'admin_customerslist' %}" class="nav-link">Active Customers </a></li>
+                  <li class="nav-item"><a href="{% url 'admin_analysis' %}" class="nav-link">Analysis </a></li>
 
                   
                   {% endif %}                  
